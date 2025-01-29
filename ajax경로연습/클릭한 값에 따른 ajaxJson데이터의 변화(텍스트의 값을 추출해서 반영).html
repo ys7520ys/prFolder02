@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JSON 기반 동적 데이터 변경</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    button {
+      margin: 5px;
+      padding: 10px 20px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    #product-container > div {
+      margin: 10px 0;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>JSON 데이터 변경 예제</h1>
+    <p>아래 버튼을 클릭하여 카테고리에 해당하는 데이터를 확인하세요.</p>
+  </header>
+  
+  <main>
+    <div>
+      <button data-category="top">Top</button>
+      <button data-category="pants">Pants</button>
+      <button data-category="shoes">Shoes</button>
+    </div>
+    <div id="product-container"></div>
+  </main>
+
+  <script>
+    // JSON 데이터
+    const jsonData = [
+      { id: 1, name: "Product A", category: "top", price: 100 },
+      { id: 2, name: "Product B", category: "pants", price: 150 },
+      { id: 3, name: "Product C", category: "shoes", price: 200 }
+    ];
+
+    // 제품을 렌더링하는 함수
+    function renderProducts(products) {
+      // 받아온 함수의 내용을 토대로 진행한다. 해당 products의 값 안에는 현재 사용자가 클릭한 내용이 존재한다.
+      const container = document.getElementById("product-container");
+      // 하단에 구성된 클릭된 내용의 값이 화면에 등장할 영역을 변수의 형태로 가진다.
+      container.innerHTML = ""; // 기존 내용 초기화
+      products.forEach(product => {
+        // 해당 제품의 값을 순환하며 비교한다.
+        const productDiv = document.createElement("div");
+        // div의 값을 생성하여 저장된 데이터가 들어갈 울타리를 생성한다.
+
+        // 하단의 함수에서 전달받은 내용의 값을 토대로 해당 내용의 값을 가져온다 
+        //    이렇게 가져온 값을 html의 형태로 추가한다.
+        productDiv.innerHTML = `<h3>${product.name}</h3><p>Price: $${product.price}</p>`;
+        container.appendChild(productDiv); // 이렇게 해당 내용을 저장한 html의 형태를 contaier즉 
+        //  div의 자식의 값으로 추가한다.
+      });
+    }
+
+    // 버튼 클릭 이벤트
+    // 각각의 버튼의 값을 클릭하면 모든 버튼의 값을 거치면서 반복문이 동작한다.
+    document.querySelectorAll("button").forEach(button => {
+      // 현재 클릭한 버튼이 동작하면 함수가 실행된다.
+      button.addEventListener("click", (event) => {
+        // 클릭을 진행하면 버튼 안에 구성된 텍스트의 값을 추출해서 변수에 저장한다.
+        const category = event.target.getAttribute("data-category");
+        // 이렇게 변수로 저장한 값을 filter를 통해서 현재 저장된 json의 내용과 비교를 진행한다. 
+        const filteredProducts = jsonData.filter(product => product.category === category);
+        renderProducts(filteredProducts); // 현재 클릭이 이루어진 버튼 안의 내용의 값과 동일한 json데이터의ㅣ 값을 가져온다. 그리고 이러한 현재 값을 
+        //함수로 전달하여 상단으로 이동시킨다. 
+      });
+    });
+  </script>
+</body>
+</html>

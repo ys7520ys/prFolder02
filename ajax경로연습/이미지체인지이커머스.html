@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Gallery</title>
+  <style>
+    .image-gallery {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .main-image img {
+      width: 300px;
+      height: 300px;
+      object-fit: cover;
+      border: 1px solid #ddd;
+      margin-bottom: 10px;
+    }
+
+    .thumbnail-images {
+      display: flex;
+      gap: 10px;
+    }
+
+    .thumbnail-images img {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      cursor: pointer;
+      border: 1px solid #ddd;
+      transition: border-color 0.3s;
+    }
+
+    .thumbnail-images img:hover {
+      border-color: #007bff;
+    }
+
+    .thumbnail-images img.active {
+      border-color: #ff0000;
+      opacity: 1;
+      transition: opacity 0.5s;
+    }
+  </style>
+</head>
+<body>
+  <div class="image-gallery">
+    <div class="main-image">
+      <img id="largeImage" src="https://nimg.lfmall.co.kr/file/product/prd/HZ/2024/375/HZTS4D951G1_00.jpg" alt="Large view">
+    </div>
+    <div class="thumbnail-images">
+      <img src="https://nimg.lfmall.co.kr/file/product/prd/HZ/2024/375/HZTS4D951G1_00.jpg" alt="Thumbnail 1" class="thumbnail" data-large="https://nimg.lfmall.co.kr/file/product/prd/HZ/2024/375/HZTS4D951G1_00.jpg">
+      <img src="https://nimg.lfmall.co.kr/file/product/prd/HU/2024/375/HUSW4D772BK_00.jpg" alt="Thumbnail 2" class="thumbnail" data-large="https://nimg.lfmall.co.kr/file/product/prd/HU/2024/375/HUSW4D772BK_00.jpg">
+      <img src="https://nimg.lfmall.co.kr/file/product/prd/HW/2024/375/HWSW4D772IV_00.jpg" alt="Thumbnail 3" class="thumbnail" data-large="https://nimg.lfmall.co.kr/file/product/prd/HW/2024/375/HWSW4D772IV_00.jpg">
+      <img src="https://nimg.lfmall.co.kr/file/product/prd/HZ/2024/375/HZTS4D951G1_00.jpg" alt="Thumbnail 4" class="thumbnail" data-large="https://nimg.lfmall.co.kr/file/product/prd/HZ/2024/375/HZTS4D951G1_00.jpg">
+    </div>
+  </div>
+  <script>
+    const largeImage = document.getElementById('largeImage');
+    const initialImageSrc = largeImage.src; 
+    
+    document.querySelectorAll('.thumbnail').forEach(thumbnail => {
+      thumbnail.addEventListener('mouseenter', function () {
+        const largeImage = document.getElementById('largeImage');
+        largeImage.src = this.dataset.large;
+      });
+      thumbnail.addEventListener('mouseout',function(){
+        largeImage.src = initialImageSrc;
+      })
+    });
+  </script>  
+</body>
+</html>

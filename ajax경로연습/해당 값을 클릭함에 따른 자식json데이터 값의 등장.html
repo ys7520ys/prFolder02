@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JSON 배열 기반 HTML 생성</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    .filter-btn {
+      margin: 5px;
+      padding: 10px 20px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .filter-btn:hover {
+      background-color: #0056b3;
+    }
+    #product-container > div {
+      margin: 10px 0;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+    }
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    li {
+      margin: 5px 0;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>JSON 배열 기반 HTML 생성</h1>
+    <p>버튼을 클릭하여 JSON 배열의 값을 기반으로 HTML을 동적으로 생성합니다.</p>
+  </header>
+  
+  <main>
+    <div>
+      <button class="filter-btn top">Top</button>
+      <button class="filter-btn pants">Pants</button>
+      <button class="filter-btn shoes">Shoes</button>
+    </div>
+    <div id="product-container"></div>
+  </main>
+
+  <script>
+    // JSON 데이터
+    const jsonData = [
+      {
+        id: 1,
+        name: "Product A",
+        category: "top",
+        price: 100,
+        features: ["Lightweight", "Durable", "Stylish"]
+      },
+      {
+        id: 2,
+        name: "Product B",
+        category: "pants",
+        price: 150,
+        features: ["Comfortable", "Waterproof", "Breathable"]
+      },
+      {
+        id: 3,
+        name: "Product C",
+        category: "shoes",
+        price: 200,
+        features: ["Non-slip", "Ergonomic", "High Performance"]
+      }
+    ];
+
+    // 제품을 렌더링하는 함수
+    function renderProducts(products) {
+      const container = document.getElementById("product-container");
+      container.innerHTML = ""; // 기존 내용 초기화
+
+      products.forEach(product => {
+        const productDiv = document.createElement("div");
+        
+        // HTML 구성: 기본 정보 + 배열 값 처리
+        productDiv.innerHTML = `
+          <h3>${product.name}</h3>
+          <p>Price: $${product.price}</p>
+          <h4>Features:</h4>
+          <ul>
+            ${product.features.map(feature => `<li>${feature}</li>`).join("")}
+          </ul>
+        `;
+
+        // HTML에 추가
+        container.appendChild(productDiv);
+      });
+    }
+
+    // 버튼 클릭 이벤트
+    document.querySelectorAll(".filter-btn").forEach(button => {
+      button.addEventListener("click", (event) => {
+        const category = event.target.classList[1];
+        const filteredProducts = jsonData.filter(product => product.category === category);
+        renderProducts(filteredProducts);
+      });
+    });
+
+    // 해당 버튼의 값을 클릭하면 해당 버튼에 저장된 클래스의 값을 json데이터의 값에서 찾는다. 그리고 만약 해당 데이터의 값과 일치하면 값을 저장해서 변경하는 함수로 전달하여 내용의 값을 변경한다.
+  </script>
+</body>
+</html>

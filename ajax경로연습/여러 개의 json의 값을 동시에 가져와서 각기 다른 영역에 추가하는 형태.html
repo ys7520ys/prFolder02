@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JSON 데이터 동적 렌더링</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    .sliderAreaSwiperMiddle, .productArea {
+      margin: 20px 0;
+    }
+    .swiper-wrapper, .grid_container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .swiper-slide, .grid_item {
+      width: 200px;
+      border: 1px solid #ddd;
+      padding: 10px;
+      border-radius: 5px;
+      text-align: center;
+    }
+    .product_name {
+      font-weight: bold;
+      margin: 10px 0;
+    }
+    .product_price {
+      color: #007BFF;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>JSON 데이터 동적 렌더링</h1>
+    <p>다양한 JSON 데이터를 각각의 컨테이너에 동적으로 추가합니다.</p>
+  </header>
+
+  <main>
+    <section class="sliderAreaSwiperMiddle">
+      <h2>Slider Area</h2>
+      <div class="swiper-wrapper"></div>
+    </section>
+
+    <section class="productArea">
+      <h2>Product Grid Area</h2>
+      <div class="grid_container"></div>
+    </section>
+  </main>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(async function () {
+      // 총 3곳에서 데이터의 값을 가져온다.
+      const jsonUrls = ['/json/data1.json', '/json/data2.json', '/json/data3.json'];
+
+      async function fetchJson(url) {
+        try {
+          const response = await $.ajax({ url, dataType: 'json' });
+          return response;
+        } catch (error) {
+          console.error(`${url} 데이터를 불러오는 중 오류가 발생했습니다:`, error);
+          return null;
+        }
+      }
+
+      // 컨테이너 구분
+      const $sliderContainer1 = $('.sliderAreaSwiperMiddle .swiper-wrapper');
+      const $sliderContainer2 = $('.productArea .grid_container');
+
+      for (const [index, url] of jsonUrls.entries()) {
+        const data = await fetchJson(url);
+        if (data) {
+          console.log(`${url}에서 받은 데이터:`, data);
+
+          // JSON 데이터를 처리하여 각각의 컨테이너에 추가
+          $.each(data, function (_, item) {
+            const formattedPrice = Number(item.obj_price).toLocaleString();
+
+            const slideHtml = `
+              <div class="swiper-slide">
+                <a href="product.html?id=${item.obj_id}">
+                  <div>
+                    <img src="${item.obj_img}" alt="">
+                    <div class="product_name">${item.obj_name}</div>
+                    <div class="product_price">${formattedPrice}원</div>
+                  </div>
+                </a>
+              </div>
+            `;
+
+            // 각 컨테이너에 데이터 추가
+            if (index === 0) {
+              $sliderContainer1.append($(slideHtml));
+            } else if (index === 1) {
+              $sliderContainer2.append($(slideHtml).addClass('grid_item'));
+            } else {
+              console.log('세 번째 JSON 데이터를 처리할 수 있습니다.');
+            }
+          });
+        }
+      }
+    });
+  </script>
+</body>
+</html>

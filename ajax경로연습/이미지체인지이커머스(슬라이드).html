@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Gallery</title>
+  <style>
+    .main-image {
+      overflow: hidden; /* 슬라이드가 영역 밖으로 나가지 않도록 설정 */
+      position: relative;
+      width: 300px;
+      height: 300px;
+    }
+
+    .image-wrapper {
+      display: flex; /* 슬라이드 이동을 위해 사용 */
+      transition: transform 0.5s ease; /* 슬라이드 전환 효과 */
+    }
+
+    .image-wrapper img {
+      min-width: 100%; /* 각 이미지가 한 화면에 꽉 차게 설정 */
+      height: 300px;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+  <div class="main-image">
+    <div class="image-wrapper">
+      <img id="largeImage" src="https://nimg.lfmall.co.kr/file/product/prd/HZ/2024/375/HZTS4D951G1_00.jpg" alt="Large view">
+    </div>
+  </div>
+  <script>
+    const thumbnails = document.querySelectorAll('.thumbnail');
+    const imageWrapper = document.querySelector('.image-wrapper');
+    let currentIndex = 0;
+
+    thumbnails.forEach((thumbnail, index) => {
+      thumbnail.addEventListener('click', function () {
+        // 클릭한 썸네일의 이미지 URL 가져오기
+        const largeImageSrc = this.dataset.large;
+
+        // 현재 슬라이드 인덱스 업데이트
+        currentIndex = index;
+
+        // 이미지 래퍼를 이동하여 슬라이드 효과 적용
+        imageWrapper.style.transform = `translateX(-${currentIndex * 300}px)`;
+
+        // 이미지 동적으로 변경 (만약 필요한 경우)
+        const largeImage = document.getElementById('largeImage');
+        largeImage.src = largeImageSrc;
+      });
+    });
+  </script>  
+</body>
+</html>

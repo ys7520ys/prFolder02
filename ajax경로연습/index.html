@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>이커머스 제품 목록</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+    #product-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .product {
+      border: 5px solid #ff0000;
+      border-radius: 8px;
+      padding: 10px;
+      width: calc(33.33% - 20px);
+      box-sizing: border-box;
+      text-align: center;
+      cursor: pointer;
+    }
+    .product img {
+      max-width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+  <div id="product-list">
+    <!-- 제품 목록이 여기에 동적으로 렌더링됩니다 -->
+    <!-- L> 하단에서 생성한 제품의 값을 생성하여 추가된다. 
+          만약 10개의 json데이터의 값이 존재한다면 자식의 값으로 10개가 추가된다.-->
+  </div>
+
+  <script>
+    // dom의 값이 구성되면 해당 함수의 값이 동작한다.
+    document.addEventListener("DOMContentLoaded", function () {
+      const productList = document.getElementById("product-list");
+      // 제품을 추가할 부모의 요소이다.
+
+      const data = [
+        { id: 1, name: "제품 A", image: "https://via.placeholder.com/300x200?text=Product+A", price: "10,000원" },
+        { id: 2, name: "제품 B", image: "https://via.placeholder.com/300x200?text=Product+B", price: "15,000원" },
+        { id: 3, name: "제품 C", image: "https://via.placeholder.com/300x200?text=Product+C", price: "20,000원" }
+      ];
+
+      // 제품 리스트 렌더링
+      data.forEach(product => {
+        const productBox = document.createElement("div");
+        productBox.classList.add("product");
+        // 각각의 상자에 스타일의 값을 추가한다. 
+
+        // 순서대로 product-detail.html?id=1, product-detail.html?id=2 이렇게 링크의 값이 생성된다.
+        // 앞에 구성한 product-detail.html에 뒤에 붙인 ?id=1,2,3 이러한 값은 영향을 끼치지 않는다. 
+        //    이렇게 뒤에 id의 값을 추가하여 구성하는 이유는 해당 페이지의 값을 요청하면서 추가적인 데이터의 값을 전달하는 것이다. id=1의 값을 붙인 링크의 값을 만약에 클릭을 한다면 추가적으로 id=1의 값을 추가해서 데이터를 전달하는 것이다. 
+        productBox.innerHTML = `
+          <a href="product-detail.html?id=${product.id}">
+            <img src="${product.image}" alt="${product.name}">
+            <h2>${product.name}</h2>
+            <p>${product.price}</p>
+          </a>
+        `;
+        // 
+        productList.appendChild(productBox);
+      });
+    });
+  </script>
+</body>
+</html>

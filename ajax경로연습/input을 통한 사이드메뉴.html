@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkbox Sidebar Menu</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      overflow-x: hidden; /* 가로 스크롤 방지 */
+    }
+
+    /* 기본 스타일 */
+    .menu-toggle {
+      display: none;
+      border: solid 2px red;
+    }
+
+    .menu-label {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 1000;
+      display: inline-block;
+      background-color: #007BFF;
+      color: #fff;
+      padding: 10px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .menu-label:hover {
+      background-color: #0056b3;
+    }
+
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: -250px; /* 처음엔 숨겨진 상태 */
+      width: 250px;
+      height: 100%;
+      background-color: #333;
+      color: #fff;
+      transition: left 0.3s ease;
+      padding: 20px;
+      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .sidebar ul li {
+      margin: 15px 0;
+    }
+
+    .sidebar ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 18px;
+    }
+
+    .sidebar ul li a:hover {
+      text-decoration: underline;
+    }
+
+    /* 메뉴 열림 상태 */
+    .menu-toggle:checked + .menu-label + .sidebar {
+      left: 0; /* 사이드 메뉴 열기 */
+    }
+  </style>
+</head>
+<body>
+
+<!-- Checkbox와 Label -->
+<input type="checkbox" id="menuToggle" class="menu-toggle"/>
+<label for="menuToggle" class="menu-label">☰ Menu</label>
+
+<!-- 사이드 메뉴 -->
+<div class="sidebar">
+  <ul>
+    <li><a href="#">Home</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="#">Services</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+</div>
+
+</body>
+</html>

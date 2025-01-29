@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .hidden {
+      display: none;
+    }
+
+    .dropdown {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: white;
+      border: 1px solid #ccc;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      padding: 10px;
+      list-style: none;
+      z-index: 10;
+    }
+
+    .dropdown li {
+      margin: 5px 0;
+    }
+
+  </style>
+</head>
+<body>
+    <!-- 드롭다운 버튼 -->
+  <button id="dropdownButton" aria-haspopup="true" aria-expanded="false">
+    메뉴 열기
+  </button>
+
+  <!-- 드롭다운 메뉴 -->
+  <ul id="dropdownMenu" class="dropdown hidden" role="menu" aria-hidden="true">
+    <li role="menuitem"><a href="#link1">옵션 1</a></li>
+    <li role="menuitem"><a href="#link2">옵션 2</a></li>
+    <li role="menuitem"><a href="#link3">옵션 3</a></li>
+  </ul>
+  <script>
+    const dropdownButton = document.getElementById('dropdownButton');
+    const dropdownMenu = document.getElementById('dropdownMenu');
+
+    function toggleDropdown() {
+      const isExpanded = dropdownButton.getAttribute('aria-expanded') === 'true';
+      dropdownButton.setAttribute('aria-expanded', !isExpanded);
+      dropdownMenu.classList.toggle('hidden');
+      dropdownMenu.setAttribute('aria-hidden', isExpanded);
+    }
+
+    // 버튼 클릭 시 드롭다운 열기/닫기
+    dropdownButton.addEventListener('click', toggleDropdown);
+
+    // 외부 클릭 시 드롭다운 닫기
+    document.addEventListener('click', (e) => {
+      if (!dropdownButton.contains(e.target) && !dropdownMenu.contains(e.target)) {
+        dropdownButton.setAttribute('aria-expanded', 'false');
+        dropdownMenu.classList.add('hidden');
+        dropdownMenu.setAttribute('aria-hidden', 'true');
+      }
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    const menuItems = dropdownMenu.querySelectorAll('li > a');
+
+    dropdownButton.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        menuItems[0].focus(); // 첫 번째 항목에 초점 이동
+      }
+    });
+
+    menuItems.forEach((item, index) => {
+      item.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          const nextIndex = (index + 1) % menuItems.length;
+          menuItems[nextIndex].focus(); // 다음 항목으로 초점 이동
+        } else if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          const prevIndex = (index - 1 + menuItems.length) % menuItems.length;
+          menuItems[prevIndex].focus(); // 이전 항목으로 초점 이동
+        } else if (e.key === 'Escape') {
+          dropdownButton.focus(); // 버튼으로 초점 이동 후 드롭다운 닫기
+          dropdownButton.setAttribute('aria-expanded', 'false');
+          dropdownMenu.classList.add('hidden');
+        }
+      });
+});
+  </script>
+</body>
+</html>
