@@ -1,0 +1,144 @@
+Reset CSS:
+  HTML요소들의 기본 스타일을 재설정하여, 브라우저 간의 스타일 차이를 줄이고 일관된 스타일을 할 수 있도록 만드는 기법을 말한다.
+  공식적으로 지정된 Reset CSS는 존재하지 않으며, 여러 개발자와 커뮤니티에서 다양한 형태의 Reset CSS가 존재한다.
+
+  가장 유명한 Reset CSS예제:
+    (Eric Meyer's Reset CSS)
+      가장 유명한 Reset CSS중 하나로, 웹 개발자가 Eric Meyer가 작성한 기본적인 Reset CSS이다.
+      불필요한 여백과 스타일을 초기화하여 스타일링을 간편하게 만든다.
+
+
+
+
+
+
+    /*
+      /* Eric Meyer’s Reset CSS */
+      /* https://meyerweb.com/eric/tools/css/reset/ */
+      html, body, div, span, applet, object, iframe,
+      h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+      a, abbr, acronym, address, big, cite, code,
+      del, dfn, em, img, ins, kbd, q, s, samp,
+      small, strike, strong, sub, sup, tt, var,
+      b, u, i, center,
+      dl, dt, dd, ol, ul, li,
+      fieldset, form, label, legend,
+      table, caption, tbody, tfoot, thead, tr, th, td,
+      article, aside, canvas, details, embed,
+      figure, figcaption, footer, header, hgroup,
+      menu, nav, output, ruby, section, summary,
+      time, mark, audio, video {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font-size: 100%;
+        font: inherit;
+        vertical-align: baseline;
+      }
+      /* HTML5 display-role reset for older browsers */
+      article, aside, details, figcaption, figure,
+      footer, header, hgroup, menu, nav, section {
+        display: block;
+      }
+      body {
+        line-height: 1;
+      }
+      ol, ul {
+        list-style: none;
+      }
+      blockquote, q {
+        quotes: none;
+      }
+      blockquote:before, blockquote:after,
+      q:before, q:after {
+        content: '';
+        content: none;
+      }
+      table {
+        border-collapse: collapse;
+        border-spacing: 0;
+      }
+    */  
+    L> ::before와 ::after에 공백으로 설정하는 이유
+        기본 스타일의 차이 제거:
+          일부 브라우저에서는 <blockquote>나 <q>태그가 **자동으로 인용부호 " ** " 를 추가하는 경우가 존재한다. 하지만 이러한 인용부호의 스타일과 모양은 브라우저마다 다를 수 있다.
+
+        일관성 유지:
+          content: ''; 로 설정하여 ::before와 ::after의 기본 인용부호 스타일을 제거하면, 웹 개발자가 직접 스타일을 지정하지 않는 한 인용부호가 나타나지 않도록 할 수 있다. 이렇게 하면 브라우저가 기본적으로 추가하는 인용부호를 제거하고, 모든 브라우저에서 일관되게 스타일링을 할 수 있다.
+        
+        유연성:
+          필요할 경우, CSS에서 개발자가 원하는 스타일의 ::before와 ::after를 추가할 수 있다. 초기화가 되어 있으므로 기본 스타일에 영향을 받지 않고 자유롭게 디자인을 할 수 있다.
+    
+    L> table 초기화가 필요한 경우:
+        테이블의 간격을 초기화:
+          HTML에서 기본적으로 <table>은 **셀 사이에 간격이 적용되어 있다. 이 간격의 크기나 표시 방식이 브라우저마다 다를 수 있기 때문에, border-spacing: 0; 을 설정하여 모든 브라우저에서 셀 간격을 제거한다.
+        
+        경계선 스타일 초기화:
+          border-collapse: collapse;를 설정하면 테이블 셀 사이의 경계선을 하나로 합쳐 보다 깔끔한 스타일을 제공한다. 또한, 브라우저마다 다른 방식으로 렌더링되는 기본 경계선 스타일을 통일하는 데 도움을 준다.
+
+        일관된 디자인을 위한 준비:
+          테이블 스타일을 초기화하면, 개발자가 의도한 대로 테이블 스타일을 커스텁마이징할 수 있다. 초기화되지 않은 상태라면 브라우저에 따라서 다르게 보일 수 있는 기본적인 스타일이 남아 있어, 원하는 스타일링이 어려울 수 있다.
+
+
+
+
+
+
+
+    Normalize.css
+      Reset CSS와 유사한 기능을 하지만, 모든 기본 스타일을 제거하는 것이 아니라 브라우저 기본 스타일을 다듬어서 일관된 스타일을 제공하는 CSS파일이다. Normalize.css는 공식적인 표준은 아니지만, 널리 사용되며 많은 프로젝트에서 Reset CSS대신에 사용된다.
+
+      Normalize.css는 GitHub에서 유지 관리되며, 기본적으로 많은 브라우저에서 일관된 스타일링을 보장한다.
+    
+    Reset CSS 사용 시 고려사항:
+      Reset CSS와 Normalize.css의 선택:
+        Reset CSS는 모든 기본 스타일을 제거하여 완전히 새로운 스타일링을 원하는 경우 유용하지만, Normalize.css는 브라우저 간의 차이를 최소화하면서 기본 스타일을 유지하므로 상황에 따라 선택할 수 있다.
+      
+        커스터마이징:
+          프로젝트에 맞춰 Reset CSS커스터마이징하여 필요한 속성만 초기화하는 것도 가능하다.
+
+        코드 크기 최적화:
+          필요하지 않은 태그의 초기화를 줄여서 파일의 크기를 줄이는 것도 좋은 방법이다.
+
+
+
+
+
+
+
+  브라우저마다 다르게 설정해야 할까?:
+    Reset CSS와 Normalize.css는 모든 브라우저에서 동일하게 로드되는 CSS파일이기 때문에, 한 번만 설정하면 모든 브라우저에서 동일한 초기화 효과를 얻을 수 있다.
+
+    Reset CSS와 Normalize.css는 웹 표준을 준수하면서도 브라우저 간의 기본 스타일 차이를 줄이기 위해서 설계가 이루어졌다. 모든 브라우저에서 동일한 파일을 로드해도 문제없이 작동하도록 만들어졌다.
+
+    각 부라우저는 Reset CSS나 Normalize.css를 통해 스타일을 초기화하거나 일관된 스타일을 적용받기 때문에, 추가적으로 개별 브라우저마다 설정할 필요가 없다.
+
+
+
+
+
+
+
+  사용방법:
+    CSS 파일 로드:
+      Reset CSS 또는 Normalize.css파일을 프로젝트의 CSS파일로 불러와 전역으로 한 번만 적용한다.
+
+    모든 페이지에 적용:
+      이 파일을 HTML의 'head' 태그 안에 'link'로 불러오거나, CSS 코드의 맨 앞부분에 포함하여 모든 페이지에 일관되게 적용한다.
+
+
+
+
+
+
+  예시코드:
+    <head>
+      <link rel="stylesheet" href="reset.css"> <!-- Reset CSS 또는 Normalize.css -->
+      <link rel="stylesheet" href="style.css"> <!-- 프로젝트의 메인 스타일 -->
+    </head>
+  
+
+
+
+결론:
+  Reset CSS는 공식 표준이 없으며 Eric Meyer의 Reset CSS나 Normalize.css와 같은 널리 사용되는 스타일을 참고하여 프로젝트에 맞게 적용하면 된다.

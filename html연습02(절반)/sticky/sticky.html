@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sticky vs Fixed Example</title>
+  <style>
+    /* 페이지 전체 스타일 */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* 긴 콘텐츠 영역 */
+    .container {
+      height: 1000px; /* 스크롤을 위한 충분한 높이 */
+      background-color: #f0f0f0;
+      padding: 20px;
+      border: 1px solid #ccc;
+      margin-bottom: 20px;
+    }
+
+    /* Sticky 헤더 스타일 */
+    .sticky-header {
+      position: sticky;
+      top: 20px; /* 상단에서 20px 위치에 고정 */
+      background-color: #333;
+      color: white;
+      padding: 10px;
+      font-size: 18px;
+      z-index: 10;
+    }
+
+    /* Fixed 헤더 스타일 */
+    .fixed-header {
+      position: fixed;
+      top: 20px; /* 항상 상단에서 20px 위치에 고정 */
+      right: 20px;
+      background-color: #007bff;
+      color: white;
+      padding: 10px;
+      font-size: 18px;
+      z-index: 10;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Fixed 헤더 요소 -->
+  <div class="fixed-header">I'm a fixed header!</div>
+
+  <!-- Sticky 헤더 요소가 포함된 섹션 -->
+  <div class="container">
+    <div class="sticky-header">I'm a sticky header!</div>
+    <p>This is some content inside the container. Scroll down to see the sticky header in action.</p>
+    <p>More content here to create a scroll effect...</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+  </div>
+
+  <!-- 더 많은 콘텐츠 영역 -->
+  <div class="container">
+    <p>Another container to show where the sticky element stops.</p>
+    <p>Keep scrolling to see the difference between sticky and fixed.</p>
+  </div>
+
+</body>
+</html>

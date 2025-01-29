@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .parent{
+      /* 앞에 --를 붙이면 이제 속성이 아니라 변수다. */
+      --pwidth: 300px; /* 300px의 값을 pwidth라는 변수에 담았다. */
+      width: calc(var(--pwidth) * 2); /* 변수를 호출하여 너비를 지정함 */
+      height: 100px;
+      margin: auto;
+      background-color: crimson;
+    }
+  </style>
+</head>
+<body>  
+  <div class="parent"></div>
+</body>
+</html>

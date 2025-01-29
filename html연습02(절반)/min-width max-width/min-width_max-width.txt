@@ -1,0 +1,26 @@
+min-width(), max-width()
+
+  --min-width()--
+  @media (min-width: 1000px) {
+    body{
+      background: red;
+    }
+  }
+  L> 1000px이상인 경우에 해당 css값이 적용된다.
+
+  --max-width()--
+  @media (max-width: 1000px) {
+    body{
+      background: blue;
+    }
+  }
+  L> 1000px이하인 경우에 해당 CSS값이 적용된다.
+
+min-width를 사용하는 경우
+  스마트폰 등 가장 작은 사이즈에서의 레이아웃을 기본으로 하고, 점차 확장해서 진행되는 형태로 CSS를 작성한다.
+
+max-width를 사용하는 경우
+  데스크탑용의 가장 큰 화면의 사이즈의 레이아웃을 기본으로 하고, 점차 축소하는 형태로 CSS를 작성한다.
+
+--추가내용--
+mediaquery는 가장 최하단에 위치해야 상단에서 설정한 css의 값을 변동하면서 동작을 진행할 수 있다.

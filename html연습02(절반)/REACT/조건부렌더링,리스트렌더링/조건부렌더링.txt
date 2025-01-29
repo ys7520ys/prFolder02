@@ -1,0 +1,210 @@
+조건부 렌더링 (Conditional Rendering)
+  조건부 렌더링은 사용자 상태나 특정 조건에 따라서 UI를 다르게 보여줄 때 사용한다.
+  
+  주로 사용되는 곳
+    1.로그인/로그아웃 상태에 따른 UI변화:
+        사용자가 로그인 했을 때와 그렇지 않을 때 화면에 보이는 메뉴나 버튼을 다르게 설정할 수 있다.
+      ex 
+        로그인 상태 => "로그아웃" 버튼을 화면에 표기
+        로그아웃 상태 => "로그인", "회원가입" 버튼을 화면에 표기
+
+    2.상품정보:
+        쇼핑몰에서 특정 상품이 품절되었을 경우"품절" 배지를 표시하거나, 재고가 있을 때만 "장바구니에 추가" 버튼을 화면에 보여주는 것도 조건부 렌더링을 통해서 구현을 할 수 있다.
+    
+    3.로딩 상태 표시:
+        API를 통해서 데이터를 가져오는 경우, 데이터를 불러오는 동안 "로딩 중" 스피너나 메시지를 표시하고 데이터가 준비되면 실제 콘텐츠를 보여주는 방식으로 조건부 렌더링을 사용할 수 있다.
+
+L> 이러한 조건부 렌더링과 리스트 렌더링을 통해서 상황에 맞는 동적인 UI를 구현할 수 있으며 코드를 깔끔하게 유지할 수 있다.
+
+
+--------------------
+사용자의 로그인과 로그아웃
+
+  예시
+    사용자가 로그인했을 때와 로그아웃했을 때 다른 메뉴 버튼이 나타나도록 조건부 렌더링을 사용
+
+    /*
+      import React from 'react';
+
+      const Header = ({ isLoggedIn }) => {
+        return (
+          <nav>
+            <a href="/">Home</a>
+            {isLoggedIn ? (
+              <>
+                <a href="/profile">My Profile</a>
+                <a href="/logout">Logout</a>
+              </>
+            ) : (
+              <>
+                <a href="/login">Login</a>
+                <a href="/register">Register</a>
+              </>
+            )}
+          </nav>
+        );
+      };
+
+      export default Header;
+    */
+
+  코드설명
+
+    {isLoggedIn ? ( "true인 경우" ) : ( "false인 경우" )}
+      L> isLoggedIn이 true일 때는 "My Profile"과 "Logout" 버튼을 화면에 보여주고,
+          isLoggedIn이 false일 때는 "Login"과 "Register" 버튼을 보여준다. 
+
+-
+-
+-
+
+  로그인의 상태를 확인하는 경우
+
+    로그인 상태 변화가 발생하는 곳
+      1.로그인 form 제출:
+          사용자가 로그인 form에 id와 password를 입력하고 "로그인" 버튼을 클릭할 때
+      2.로그아웃 버튼 클릭:
+          사용자가 "로그아웃" 버튼을 클릭할 때
+      3.자동 로그인 체크:
+          페이지 로드 시, 이전에 로그인한 세션 정보가 있는지 확인할 때
+    
+    로그인 상태 변화 구현하기
+      로그인 상태 변화를 구현하려면 useState hook을 사용하여 상태를 관리할 수 있다.
+
+  예시
+    /*
+      import React, { useState } from 'react';
+      import Header from './Header';
+
+      const App = () => {
+        // 로그인 상태를 관리하는 state
+        const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+        // 로그인 함수 (로그인 폼 제출 시 호출)
+        const handleLogin = () => {
+          setIsLoggedIn(true); // 로그인 상태로 변경
+        };
+
+        // 로그아웃 함수 (로그아웃 버튼 클릭 시 호출)
+        const handleLogout = () => {
+          setIsLoggedIn(false); // 로그아웃 상태로 변경
+        };
+
+        return (
+          <div>
+            {/* 로그인 상태를 Header에 props로 전달 */}
+            <Header isLoggedIn={isLoggedIn} />
+
+            {/* 로그인 상태에 따른 버튼 표시 */}
+            {isLoggedIn ? (
+              <button onClick={handleLogout}>Logout</button>
+            ) : (
+              <button onClick={handleLogin}>Login</button>
+            )}
+          </div>
+        );
+      };
+
+      export default App;
+    */
+
+  코드설명
+
+    1.useState로 isLoggedIn상태를 생성하고, 초기값을 false로 설정하였다.
+    2.handleLogin 함수:
+        이 함수는 로그인 상태를 true로 변경하며 사용자가 로그아웃 버튼을 클릭했을 때 호출한다.
+    3.handleLogout 함수:
+        로그아웃 상태로 변경하는 함수로, 사용자가 로그아웃 버튼을 클릭했을 때 호출한다.
+
+  L> 로그인 상태 변화는 useState와 같은 상태 관리로 구현하고, 상태를 props로 전달하여 자식 컴포넌트에서 조건부 렌더링을 할 수 있도록 한다.
+
+
+--------------------
+상품정보의 상태에 따른 동적 UI
+
+  상품 정보의 값을 확인하는 경우
+  상품 정보의 렌더링은, 예를 들어 상품의 재고 여부, 할인 여부, 추천 여부 등에 따라서 다르게 표시할 때 사용된다. 상품이 품절되었을 때 "품절" 메시지를 표시하거나, 할인이 적용된 경우 할인 가격을 표시하는 등 다양한 고전부 UI를 만들 수 있다.
+
+  예시
+    /*
+      import React from 'react';
+
+      const Product = ({ name, price, isInStock, discount }) => {
+        // 할인된 가격 계산
+        const discountedPrice = discount ? price - price * (discount / 100) : price;
+
+        return (
+          <div className="product">
+            <h2>{name}</h2>
+            {/* 재고 여부에 따른 품절 표시 */}
+            {!isInStock && <span className="sold-out">품절</span>}
+
+            {/* 할인이 있는 경우 할인 가격과 원래 가격 표시 */}
+            <p>
+              {discount ? (
+                <>
+                  <span className="discounted-price">할인가: ${discountedPrice.toFixed(2)}</span>
+                  <span className="original-price">정가: ${price}</span>
+                </>
+              ) : (
+                <span className="price">가격: ${price}</span>
+              )}
+            </p>
+          </div>
+        );
+      };
+
+      export default Product;
+    */
+
+  코드설명
+
+    1.재고상태(isInStock):
+        isInStock이 false인 경우에 "품절" 배지를 표시합니다.
+    2.할인여부(discount):
+        discount 값이 존재하면 할인율이 적용된 가격을 계산하고, 할인된 가격과 원래 가격을 함께 표시한다.
+    3.기본가격
+        할인이 없는 경우에는 기본 가격만 표시된다.
+
+-
+-
+-
+
+  예시
+    /*
+      import React from 'react';
+      import Product from './Product';
+
+      const App = () => {
+        const products = [
+          { id: 1, name: 'T-Shirt', price: 20, isInStock: true, discount: 10 },
+          { id: 2, name: 'Jeans', price: 40, isInStock: false, discount: 0 },
+          { id: 3, name: 'Sneakers', price: 60, isInStock: true, discount: 20 },
+        ];
+
+        return (
+          <div>
+            <h1>Product List</h1>
+            {products.map((product) => (
+              <Product
+                key={product.id}
+                name={product.name}
+                price={product.price}
+                isInStock={product.isInStock}
+                discount={product.discount}
+              />
+            ))}
+          </div>
+        );
+      };
+
+      export default App;
+    */
+  
+  코드설명
+
+    1.상품 리스트:
+        products 배열은 여러 상품을 포함하고 있으며, 각 상품에 name, price, isInStock, discount 등의 정보를 담고 있다.
+    2.리스트 렌더링:
+        products.map을 사용하여 Product 컴포넌트를 반복적으로 렌더링하고, 각 상품의 정보를 Product 컴포넌트에 전달한다.
+        

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Typing Animation Example</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #f5f5f5;
+      font-family: Arial, sans-serif;
+      font-size: 2rem;
+      color: #333;
+    }
+
+    .typing-text {
+      display: flex;
+    }
+
+    /* 아래에서 위로 올라오는 애니메이션 */
+    .letter {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.3s ease forwards;
+    }
+
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(20px); 
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="typing-text" id="typingText"></div>
+
+  <script>
+    const text = "Hello, welcome to the typing animation!";
+    const typingSpeed = 100; // 타이핑 속도 (밀리초)
+    let index = 0;
+
+    function type() {
+      if (index < text.length) {
+        // 각 글자를 개별 span으로 감싸고 애니메이션 클래스 추가
+        const span = document.createElement("span");
+        span.textContent = text[index];
+        span.classList.add("letter"); // 애니메이션 클래스
+        span.style.animationDelay = `${index * 0.1}s`; // 각 글자의 딜레이 추가
+        document.getElementById("typingText").appendChild(span);
+        
+        index++;
+        setTimeout(type, typingSpeed);
+      }
+    }
+
+    type(); // 타이핑 효과 시작
+  </script>
+
+</body>
+</html>

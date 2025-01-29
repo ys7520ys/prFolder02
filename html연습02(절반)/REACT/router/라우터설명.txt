@@ -1,0 +1,105 @@
+Router
+  Router는ㄴ 애플리케이션에서 라우팅 기능을 활성화해주는 최상위 컴포넌트이다.
+  "react-router-dom" 에서는 BrowserRouter, HashRouter 두 가지의 유형의 Router를 주로 사용합니다.
+
+    BrowserRouter:
+      HTML5의 history API를 사용하여URL을 관리하며, 일반적인 웹 어플리케이션에서 사용됩니다. 
+      creater-react-app 로 만든 어플리케이션에서는 기본적으로 BrowserRouter를 사용합니다.
+
+      HashRouter:
+        URL에 해시(#)를 추가하여 라우팅을 관리합니다. 이 방법은 서버 설정 없이도 쉽게 사용할 수 있지만, URL에 #이 포함되므로 SEO(검색 엔진 최적화) 측면에서는 적합하지 않습니다.
+
+    예시
+    /*
+      import { BrowserRouter as Router } from 'react-router-dom';
+
+      function App() {
+        return (
+          <Router>
+            {/* 다른 라우팅 컴포넌트가 이 안에 들어갑니다 */}
+          </Router>
+        );
+      }
+    */
+      Router는 애플리케이션 전체를 감싸서 라우팅 기능을 제공하는 최상위 컴포넌트 역할을 합니다.
+
+
+
+
+
+
+
+
+
+
+Routes
+  Routes는 여러 개의 Route 컴포넌트를 포함하여 현재 URL 경로에 맞는 Route를 렌더링해주는 컨테이너이다.
+  Routes 안에 포함된 각 Route는 특정 경로에 따라 렌더링할 컴포넌트를 정의합니다.
+
+  React Router v6 이전에는 Switch를 사용했지만, v6부터는 Routes로 변경되었다.
+  Routes는 첫 번째로 매칭되는 경로를 렌더링하며, 정확히 일치하는 경로를 찾기 위해서 내부적으로 최적화가 이루어져있다.
+
+    예시
+    /*
+      import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+      import Home from './Home';
+      import About from './About';
+
+      function App() {
+        return (
+          <Router>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+            </Routes>
+          </Router>
+        );
+      }
+    */
+
+      여기서 Routes는 각 Route를 포함하여, 현재 경로에 맞는 컴포넌트를 렌더링한다.
+
+Route
+  Route는 특정 경로에 매칭되는 컴포넌트를 정의하는 역할을 한다. Route는 path 속성과 element 속성을 가진다.
+
+    path:
+      URL경로를 지정하며, 예를 들어, "/about" 경로를 입력하면 /about 페이지에 해당하는 컴포넌트가 렌더링된다.
+
+    element:
+      해당 경로에서 렌더링할 컴포넌트를 지정하며, JSX에서 직접 입력할 수 있다.
+
+    예시
+    /*
+      <Route path="/" element={<Home />} />
+      <Route path="/about" element={<About />} />
+    */
+
+    "/" : 
+      경로가 /로 설정된 경우 루트 경로를 의미하므로, URL의 끝에 아무것도 붙이지 않아도 해당 경로에 매칭된다.
+      ex http://localhost:3000 == http://localhost:3000/
+
+
+
+
+
+
+
+
+
+예시
+  import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+  import Home from './Home';
+  import About from './About';
+
+  function App() {
+    return (
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+        </Routes>
+      </Router>
+    );
+  }
+
+  export default App;

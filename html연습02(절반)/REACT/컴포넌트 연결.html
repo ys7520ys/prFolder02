@@ -1,0 +1,57 @@
+function App() {
+  return (
+    <>
+      <Header/>
+      <MainContent/>
+      <Footer/>
+    </>
+  );
+}
+<!-- 하단에서 생성한 컴포넌트의 값을 App에 호출하여 화면을 구성한다 -->
+
+function Header() {
+  return(
+    <>
+      <header>
+        <h1>My Website</h1>
+        <nav>
+          <a href="#home">Home</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </header>
+    </>
+  )
+}
+<!-- Header 컴포넌트를 생성함 -->
+
+function MainContent() {
+  return (
+    <>
+      <main>
+        <h2>Welcome to My Website</h2>
+        <p>This is the main content of the page.</p>
+      </main>
+    </>
+    );
+}
+<!-- MainContent 컴포넌트를 생성함 -->
+
+function Footer() {
+  return (
+    <>
+      <footer>
+        반갑다
+      </footer>
+    </>
+  )
+}
+<!-- Footer 컴포넌트를 생성함 -->
+
+export default App;
+<!-- App 컴포넌트를 다른 파일에서 사용할 수 있도록 내보내는 역할을 한다. -->
+<!-- import App from './App'; 이러한 호출로 다른 파일에서 해당 컴포넌트의 값을 호출하여 사용할 수 있다 -->
+
+<!-- 그리고 이렇게 컴포넌트의 값을 밖으로 전달할 때는 해당 파일에서 설정한 컴포넌트의 이름을 사용해야 하며, 그리고 이렇게 전달한 컴포넌트의 값을 다른 파일에서 호출하여 사용할 때는 원래 사용한 컴포넌트의 이름을 사용하지 않고 새로운 이름을 생성하여 사용해도 된다.  -->
+
+<!-- L> 이렇게 이름을 새로 지정하여 사용하는 이유는 파일의 이름을 그대로 가져와서 사용할 때는 어떠한 기능과 의미를 지녔는지 구분하기 여럽기 때문이다 -->

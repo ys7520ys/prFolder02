@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CSS Animated Submenu</title>
+<style>
+  /* 기본 내비게이션 스타일 */
+  *{
+    box-sizing: border-box;
+  }
+
+  .nav-list {
+    list-style: none;
+    display: flex;
+    padding: 0;
+    margin: 0;
+    background-color: #333;
+  }
+
+  .nav-list li {
+    position: relative;
+  }
+
+  .nav-list li a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    padding: 15px 20px;
+    display: block;
+  }
+
+  /* 서브메뉴 스타일 */
+  .submenu {
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #444;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    transition: opacity 0.5s ease, visibility 0.4s ease;
+  }
+
+  .submenu li a {
+    padding: 10px 20px;
+    color: #fff;
+    text-decoration: none;
+    display: block;
+  }
+
+  .submenu li a:hover {
+    background-color: #555; /* 서브메뉴 hover 효과 */
+  }
+
+  /* li 요소에 hover 시 서브메뉴 표시 */
+  .nav-list li:hover .submenu {
+    opacity: 1;
+    visibility: visible;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <ul class="nav-list">
+      <li>
+        <a href="#home">Home</a>
+        <ul class="submenu">
+          <li><a href="#home1">Home 1</a></li>
+          <li><a href="#home2">Home 2</a></li>
+          <li><a href="#home3">Home 2</a></li>
+          <li><a href="#home4">Home 2</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#about">About</a>
+        <ul class="submenu">
+          <li><a href="#home1">Home 1</a></li>
+          <li><a href="#home2">Home 2</a></li>
+          <li><a href="#home3">Home 2</a></li>
+          <li><a href="#home4">Home 2</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#services">Services</a>
+        <ul class="submenu">
+          <li><a href="#home1">Home 1</a></li>
+          <li><a href="#home2">Home 2</a></li>
+          <li><a href="#home3">Home 2</a></li>
+          <li><a href="#home4">Home 2</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#portfolio">Portfolio</a>
+        <ul class="submenu">
+          <li><a href="#home1">Home 1</a></li>
+          <li><a href="#home2">Home 2</a></li>
+          <li><a href="#home3">Home 2</a></li>
+          <li><a href="#home4">Home 2</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#contact">Contact</a>
+        <ul class="submenu">
+          <li><a href="#home1">Home 1</a></li>
+          <li><a href="#home2">Home 2</a></li>
+          <li><a href="#home3">Home 2</a></li>
+          <li><a href="#home4">Home 2</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    /* 여러 개의 변수들을 저장할 전역변수라고 생각하자 
+    L> 변수의 색깔을 변경하면 해당 변수를 사용한 모든 곳의 값을 한 번에 변경할 수 있다.*/
+    :root {
+      --primary: royalblue;
+      --secondary: black;
+      --positive: yellowgreen;
+      --nagative: crimson;
+    }
+
+    .btn {
+      border: none;
+      padding: 5px 20px;
+      border-radius: 5px;
+      color: white;
+    }
+    .btn.primary{
+      background-color: var(--primary); /* :root안에서 선언한 변수 사용 */
+      /* background-color: royalblue; */
+    }
+    .btn.secondary{
+      background-color: var(--secondary);
+    }
+    .btn.positive{
+      background-color: var(--positive);
+    }
+    .btn.nagative{
+      background-color: var(--nagative);
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <button class="btn primary">primary</button>
+    <button class="btn secondary">secondary</button>
+    <button class="btn positive">positive</button>
+    <button class="btn nagative">nagative</button>
+  </div>
+</body>
+</html>

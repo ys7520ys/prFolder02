@@ -1,0 +1,20 @@
+node_modules 폴더
+  라이브러리를 모아둔 폴더이다.
+
+public 폴더
+  static 파일을 모아놓는 곳이다.
+  ex html, image등을 모아두는 곳이다.
+
+src 폴더
+  코들르 짜는 곳이다.
+  ex 소스코드를 보관하는 곳이다
+
+package 폴더
+  프로젝트의 정보들이 저장되는 곳이다.
+  ex 이름, 버전, 라이브러리 등을 수정할 수 있다.
+
+왜 App.js인 자바스크립트로 구성된 파일에 생성해도 html파일로 변환되어 화면에 나올 수 있는 것인가?
+  App.js에서 생성한 파일은 => index.html의 파일로 이동되어서 실행되기 때문이다.
+
+react에서 생성하는 <></>는 사실 html이 아니고 jsx이다.
+  만약 javascript로 작성을 하려고 한다면 React.createElement('div',null,'Hello World') 이렇게 길게 작성해야 하고, 복잡하기 때문에 jsx를 기반으로 작성하는 것이다.

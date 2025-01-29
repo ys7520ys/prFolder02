@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    *{
+      padding: 0;
+      margin: 0;
+      text-decoration: none;
+      list-style: none;
+    }
+
+    header{
+      height: 100px;
+      background-color: #aaa;
+    }
+    main{
+      height: 400px;
+      background-color: #bbb;
+    }
+    footer{
+      height: 100px;
+      background-color: #ccc;
+    }
+    /* 가장 작은 너비의 값에서도 mediaquery의 동작안에 포함되어야 한다. */
+    @media (max-width: 1000px) {
+      body {
+        background-color: red;
+      }
+    };
+    /* L> 스크린이 1000px을 넘을 때까지 동작한다 */
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header></header>
+    <main></main>
+    <footer></footer>
+  </div>
+</body>
+</html>

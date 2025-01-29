@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GSAP Text Animation Function</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      font-size: 2rem;
+      background-color: #f0f0f0;
+    }
+
+    .text span {
+      opacity: 0; /* 초기 상태는 투명 */
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="text">Hello, GSAP World!</div>
+
+  <!-- GSAP CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+  <script>
+    // 텍스트 애니메이션 함수 정의
+    function animateText(selector, options = {}) {
+      const textElement = document.querySelector(selector);
+      const textContent = textElement.textContent;
+      textElement.innerHTML = ''; // 초기 텍스트 지우기
+
+      // 각 글자를 <span>으로 감싸기
+      textContent.split('').forEach(char => {
+        const span = document.createElement('span');
+        span.textContent = char;
+        textElement.appendChild(span);
+      });
+
+      // 기본 옵션 설정
+      const defaultOptions = {
+        opacity: 1,
+        stagger: 0.05,
+        duration: 0.5,
+        ease: "power2.out"
+      };
+
+      // 사용자 정의 옵션과 기본 옵션 병합
+      const animationOptions = { ...defaultOptions, ...options };
+
+      // GSAP 애니메이션 실행
+      gsap.to(`${selector} span`, animationOptions);
+    }
+
+    // 함수 호출로 애니메이션 실행
+    animateText('.text', { stagger: 0.1, duration: 0.7 });
+  </script>
+
+</body>
+</html>

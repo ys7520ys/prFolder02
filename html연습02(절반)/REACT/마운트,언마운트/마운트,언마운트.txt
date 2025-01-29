@@ -1,0 +1,76 @@
+React에서 script를 사용하기 위해서 필요한 mount 지식
+  React Router를 사용할 때, 페이지 전환 시 컴포넌트의 마운트와 언마운트는 자동으로 이루어진다.
+  React Router가 새로운 경로로 전환되면, 이전 페이지의 컴포넌트는 언마운트되고, 새로운 페이지의 컴포넌트 마운트가 마운트된다. => 따로 해제할 필요없음
+
+  마운트와 언마운트가 어떻게 작동하는가?
+    페이지 전환 시 자동 언마운트:
+      React Router가 URL 변경을 감지하면, 해당 URL에 맞는 컴포넌트를 새로 마운트하고 이전 컴포넌트는 언마운트된다.
+      컴포넌트가 전환될 때마다 useEffect의 클린업 함수가 실행되어 필요하지 않은 리소스를 정리해준다.
+
+    useEffect의 클린업 함수:
+      각 페이지 컴포넌트가 언마운트될 때 useEffect의 클린업 함수가 호출된다.
+      그래서 각 페이지에서 필요한 스크립트나 설정들을 자동으로 정리할 수 있다.
+    
+  예시
+    HomePage와 AboutPage 컴포넌트를 React Router로 전환될 때, 각각의 페이지에서 마운트 및 언마운트가 자동으로 이루어지는 과정을 보여준다.
+    /*
+      // App.js
+      import React from 'react';
+      import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+      import HomePage from './HomePage';
+      import AboutPage from './AboutPage';
+
+      const App = () => {
+        return (
+          <Router>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/about" element={<AboutPage />} />
+            </Routes>
+          </Router>
+        );
+      };
+
+      export default App;
+    */
+
+    /*
+      // HomePage.js
+      import React, { useEffect } from 'react';
+
+      const HomePage = () => {
+        useEffect(() => {
+          console.log('HomePage 마운트됨');
+          return () => {
+            console.log('HomePage 언마운트됨');
+          };
+        }, []);
+
+        return <h1>Home Page</h1>;
+      };
+
+      export default HomePage;
+    */
+
+    /*
+      // AboutPage.js
+      import React, { useEffect } from 'react';
+
+      const AboutPage = () => {
+        useEffect(() => {
+          console.log('AboutPage 마운트됨');
+          return () => {
+            console.log('AboutPage 언마운트됨');
+          };
+        }, []);
+
+        return <h1>About Page</h1>;
+      };
+
+      export default AboutPage;
+    */
+
+  코드설명
+    HomePage에서 AboutPage로 이동할 시:
+      HomePage는 언마운트되고, "HomePage 언마운트됨"이 console에 출력되고,
+      AboutPage는 마운트되며, "AboutPage 마운트됨"이 console에 출력된다.

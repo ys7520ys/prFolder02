@@ -1,0 +1,84 @@
+부모 컴포넌트에서 state로 관리하는 값을 props를 통해서 자식 컴포넌트로 전달하는 방식이다.
+부모 컴포넌트에서 버튼을 클릭하면 상태가 변경되면서 자식 컴포넌트는 props로 전달받은 데이터를 통해서 화면에 업데이트가 이루어진다.
+
+1. 부모 컨포넌트: App.js
+  부모 컨포넌트에서는 상태(state)를 관리하며, 그 값을 props로 자식 컴포넌트에 전달한다.
+
+  예시
+    /*
+      import React, { useState } from 'react'; // useState를 사용하기 위한 호출
+      import Message from './Message'; // Message.js에서 생성한 "Message컴포넌트" 를 호출
+
+      function App() {
+        // state를 사용하여 메시지를 관리
+        const [message, setMessage] = useState("Hello, World!");
+
+        // 버튼을 클릭하면 message 상태를 업데이트하는 함수
+        const changeMessage = () => {
+          setMessage("Hello, React!");
+        };
+
+        return (
+          <div>
+            <h1>Props and State Example</h1>
+            {/* 자식 컴포넌트에 state 값을 props로 전달 */}
+            <Message text={message} />
+            <button onClick={changeMessage}>Change Message</button>
+          </div>
+        );
+      }
+
+      export default App;
+    */
+
+    const [message, setMessage] = useState("Hello, World!")
+      L> message라는 상태(state)를 생성하고, setMessage 함수를 통해서 이 값을 변경할 수 있다.
+    
+    const changeMessage = () => {setMessage("Hello, React!");}
+      L> changeMessage 함수는 버튼을 클릭하면 호출되어 message상태를 업데이트한다.
+    
+    <Message text={message} />
+      L> 자식 컴포넌트인 Message에 text라는 이름의 props로 message 값을 전달한다.
+
+
+
+
+2. 자식 컴포넌트: Message.js
+  Message.js 파일에서는 부모 컴포넌트로부터 전달받은 props를 사용하여 화면에 메시지를 표시한다.
+
+  예시
+    /*
+      import React from 'react';
+
+      function Message({ text }) {
+        return <p>{text}</p>;
+      }
+
+      export default Message;
+    */
+
+    function Message({ text }) {return <p>{text}</p>;}
+      L> Message 컴포넌트는 text라는 props를 받아서 화면에 전달한다.
+
+    자식 props는 부모 컨포넌트가 전달한 message의 현재 값을 나타내며, 상태가 변경될 때마다 자동으로 업데이트가 이루어진다.
+
+
+1.2
+  초기 렌더링:
+    App 컴포넌트의 message상태는 "Hello, World"로 설정되어, <Message /> 컴포넌트에 해당 값을 전달한다.
+  
+  버튼 클릭시 상태 변경:
+    changeMessage 함수가 호출되면 setMessage가 실행되어 message 상태가 "Hello, React"로 변경된다.
+  
+  UI 업데이트:
+    상태가 변경되면 React는 다시 렌더링하고, Message 컴포넌트는 새로운 text 값 ("Hello, React")를 받아서 화면에 업데이트를 진행한다.
+
+
+State:
+  컴포넌트 내부에서 관리되는 동적 데이터이며 컴포넌트가 제어하고, 업데이트할 수 있습니다.
+  L> 동적인 관리에 보통 사용된다.
+
+Props:
+  부모 컴포넌트에서 자식 컴포넌트로 데이터를 전달하는 방식으로, 자식 컴포넌트에서는 읽기 전용이다.
+  자식 컴포넌트는 이 값을 수정하지 않고 표시만 할 수 있다.
+  L> 데이터를 전달하는 경우에 사용된다.

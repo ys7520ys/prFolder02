@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GSAP Text Animation Example</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      /* 상단의 3개 속성으로 인해서 화면의 중앙에 요소의 값을 위치함 */
+      height: 100vh;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      font-size: 2rem;
+      background-color: #f0f0f0;
+    }
+
+    .text span {
+      opacity: 0; /* 초기 상태는 투명 */
+      /* 글자가 화면에서 보이지 않다가 화면에서 등장해야 하기 때문에 초깃값을 0으로 설정 */
+      display: inline-block;
+        /* 각 글자의 값을 개별적인 요소의 값으로 취급하기 위해서 사용함 */
+    }
+  </style>
+</head>
+<body>
+
+  <div class="text">
+    Hello, GSAP World!
+    <!-- 애니메이션으로 동작할 텍스트 -->
+  </div>
+
+  <!-- GSAP CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+  <script>
+    const textElement = document.querySelector('.text');
+      // 텍스트 애니메이션을 동작할 요소의 값을 설정함
+    const textContent = textElement.textContent;
+      // .text에 적힌 텍스트를 긁어와서 변수에 저장한다.
+    textElement.innerHTML = ''; // 초기 텍스트를 지워서 한 글자씩 추가 예정
+      // 긁어 온 텍스트의 값을 완전히 지운다.
+
+    // 각 글자를 <span>으로 감싸기
+    textContent.split('').forEach(char => {
+        // split을 통해서 텍스트를 개별적인 문자의 값으로 분리한다.
+      const span = document.createElement('span');
+        // 이렇게 분리한 요소를 span태그로 묶어서 생성한다.
+      span.textContent = char;
+      textElement.appendChild(span);
+        // 상단에서 비운 textElement에 한 글자씩 추가를 진행한다. forEach로 인하여 해당 텍스트의 길이만큼 반복문이 동작할 것이다. 
+    });
+
+    // GSAP 애니메이션 설정
+    gsap.to('.text span', {
+      opacity: 1,
+        // 초기에 0으로 설정한 텍스트의 값을 1로 변경하여 화면에 등장하도록 설정한다.
+      stagger: 0.05, // 각 글자가 순차적으로 등장하도록 간격 설정
+      duration: 0.5, // 각 글자의 애니메이션 지속 시간
+      ease: "power2.out", // 부드러운 이징 적용
+    });
+  </script>
+
+</body>
+</html>

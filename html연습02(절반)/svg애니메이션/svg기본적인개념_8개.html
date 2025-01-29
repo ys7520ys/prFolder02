@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>인프런 SVG로딩 애니메이션1</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.1/ScrollToPlugin.min.js"></script>
+  <style>
+    *{
+      padding: 0;
+      margin: 0;
+      text-decoration: none;
+      list-style: none;
+      box-sizing: border-box;
+    }
+    .gsap>div{
+      height: 100vh;
+      border: solid 3px rgb(0, 0, 0);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+    .gsap>div>div{
+      height: 200px;
+      width: 200px;
+      border: solid 5px blue;
+      background-color: red;
+    }
+    .inner>div{
+      width: 100%;
+      height: 100%;
+      background-color: blue;
+    }
+
+
+
+
+
+    /* toggleClass */
+    .active{
+      filter: blur(6px);
+    }
+  </style>
+</head>
+<body>
+  <section class="gsap">
+    <div class="gsapChild1">
+      <div>1</div>
+    </div>
+    <div class="gsapChild2">
+      <div>2</div>
+    </div>
+    <div class="gsapChild3">
+      <div>3</div>
+    </div>
+    <div class="gsapChild4">
+      <div>4</div>
+    </div>
+    <div class="gsapChild5">
+      <div>5</div>
+    </div>
+    <div class="gsapChild6">
+      <div class="inner">
+        <div></div>
+      </div>
+    </div>
+    <div class="gsapChild7">
+      <div class="inner">
+        <div></div>
+      </div>
+    </div>
+    <div class="gsapChild8">
+      <div class="inner">
+        <div></div>
+      </div>
+    </div>
+    <div></div>
+  </section>
+
+  <script>
+    //01
+    const box1 = document.querySelector(".gsapChild1>div");
+    const box2 = document.querySelector(".gsapChild2>div");
+    const box3 = document.querySelector(".gsapChild3>div");
+    const box4 = document.querySelector(".gsapChild4>div");
+    const box5 = document.querySelector(".gsapChild5>div");
+    const box6 = document.querySelector(".gsapChild6 .inner");
+    const box7 = document.querySelector(".gsapChild7 .inner");
+    const box8 = document.querySelector(".gsapChild8 .inner");
+    gsap.to(box1,{
+      x: 400,// x축 방향으로 400px만큼 이동한다. 
+      duration: 1,// 총 동작하는 시간을 설정한다.
+      borderRadius: 100,// borderRadius의 값을 100으로 변경한다.
+      rotation: 360,// 요소를 360도 회전시킨다. 
+    })
+
+    //02: trigger
+    gsap.to(box2,{
+      duration: 2,// 총 동작하는 시간을 설정한다.
+      x: 500,// x축 방향으로 400px만큼 이동한다. 
+      rotation: 360,// 요소를 360도 회전시킨다. 
+      borderRadius: 100,// borderRadius의 값을 100으로 변경한다.
+      scrollTrigger: {// 스크롤트리거를 사용한다.
+        trigger: box2// box2의 값이 화면에 등장하면 동작하도록 설정
+      }
+    })
+
+    //03: toggleActions
+    gsap.to(box3,{
+      duration: 2,// 총 동작하는 시간을 설정한다.
+      x: 500,// x축 방향으로 400px만큼 이동한다. 
+      rotation: 360,// 요소를 360도 회전시킨다. 
+      borderRadius: 100,// borderRadius의 값을 100으로 변경한다.
+      scrollTrigger: {// 스크롤트리거를 사용한다.
+        trigger: box3,// box2의 값이 화면에 등장하면 동작하도록 설정
+        toggleActions: "play none reverse none"// 처음에 화면에 등장하면 "동작하고, 다시 돌아오면 원래대로 돌아간다"
+        //L> "onEnter(진입했을 때)" "onLeave(떠났을 때)" "onEnterBack(다시 돌아왔을 때)" "onLeaveBack(다시 돌아와서 떠났을 때)"
+        //    L> play, pause, resume, restart, complete, reverse, none 
+      }
+    })
+
+    //04: start, end
+    // 해당 위치에 도달하면 한 번에 동작한다.
+    gsap.to(box4,{
+      duration: 2,// 총 동작하는 시간을 설정한다.
+      x: 500,// x축 방향으로 400px만큼 이동한다. 
+      rotation: 360,// 요소를 360도 회전시킨다. 
+      borderRadius: 100,// borderRadius의 값을 100으로 변경한다.
+      scrollTrigger: {// 스크롤트리거를 사용한다.
+        trigger: box4,// box2의 값이 화면에 등장하면 동작하도록 설정
+        start:"top 50%",// 화면 상단의 50%에 도달했을 때 시작한다.
+        end: "bottom 20%",// 화면 하단의 20%에 도달했을 때 종료한다.
+        toggleActions: "play none reverse none",// 처음에 화면에 등장하면 "동작하고, 다시 돌아오면 원래대로 돌아간다"
+        //L> "onEnter(진입했을 때)" "onLeave(떠났을 때)" "onEnterBack(다시 돌아왔을 때)" "onLeaveBack(다시 돌아와서 떠났을 때)"
+        //    L> play, pause, resume, restart, complete, reverse, none 
+        markers: false// 어느 시점부터 동작하는지 도와주는 선을 생성
+      }
+    })
+
+    //05: scrub // scrub을 사용할 때는 toggleActions가 필요없다.
+    // 스크롤의 위치에 따라서 동작한다.
+    gsap.to(box5,{
+      duration: 2,// 총 동작하는 시간을 설정한다.
+      x: 500,// x축 방향으로 400px만큼 이동한다. 
+      rotation: 360,// 요소를 360도 회전시킨다. 
+      borderRadius: 100,// borderRadius의 값을 100으로 변경한다.
+      scrollTrigger: {// 스크롤트리거를 사용한다.
+        trigger: box5,// box2의 값이 화면에 등장하면 동작하도록 설정
+        start:"top 50%",// 화면 상단의 50%에 도달했을 때 시작한다.
+        end: "bottom 20%",// 화면 하단의 20%에 도달했을 때 종료한다.
+        //toggleActions: "play none reverse none",// 처음에 화면에 등장하면 "동작하고, 다시 돌아오면 원래대로 돌아간다"
+        //L> "onEnter(진입했을 때)" "onLeave(떠났을 때)" "onEnterBack(다시 돌아왔을 때)" "onLeaveBack(다시 돌아와서 떠났을 때)"
+        //    L> play, pause, resume, restart, complete, reverse, none 
+        scrub: 2,// true만 작성해도 되지만, 숫자를 넣어서 동작의 부드러움을 설정할 수 있다.
+        markers: false// 어느 시점부터 동작하는지 도와주는 선을 생성
+      }
+    })
+
+    //06: pin //pin은 처음 요소의 값을 고정하기 때문에 자식의 값을 생성하여 동작시켜야 한다.     
+    gsap.to(box6, {
+      duration: 2,
+      x: 500,
+      rotation: 360,
+      borderRadius: 100,
+      scrollTrigger: {
+        trigger: box6,
+        start: "top 50%",
+        end: "top 100px",
+        scrub: true,
+        pin: true,// pin을 설정하면 start의 값에서 end의 값으로 요소가 이동한다. 
+        markers: false
+      }
+    });
+
+    //07: //클래스를 추가하여 스타일을 구현할 수 있다.  
+    gsap.to(box7, {
+      duration: 2,
+      x: 500,
+      rotation: 360,
+      borderRadius: 100,
+      scrollTrigger: {
+        trigger: box7,
+        start: "top center",// top 50%의 값은 top center로 변경하여 사용할 수 있다.
+        end: "bottom top",// bottom top값은 viewport의 가장 상단을 나타낸다.
+        scrub: true,
+        toggleClass: "active",// 해당 클래스가 추가된다.
+        markers: true,
+        id: "box7"// 여러 개의 값을 설정할 때 헷갈리는 것을 방지하기 위해서 이름을 지정할 수 있다.
+      }
+    });
+    
+    //08: //callback함수 : 첫 번째 함수가 동작하고, 두 번째 함수가 동작하는 형태    
+    gsap.to(box8, {
+      duration: 2,
+      x: 500,
+      rotation: 360,
+      borderRadius: 100,
+      scrollTrigger: {
+        trigger: box8,
+        start: "top center",// top 50%의 값은 top center로 변경하여 사용할 수 있다.
+        end: "bottom 20%",// bottom top값은 viewport의 가장 상단을 나타낸다.
+        scrub: true,
+        markers: true,
+        // animation을 여러 개 연결하여 구성할 수 있다.
+        // onEnter: ()=>{console.log("onEnter")},
+        // onLeave: ()=>{console.log("onLeave")},
+        // onEnterBack: ()=>{console.log("onEnterBack")},
+        // onLeaveBack: ()=>{console.log("onLeaveBack")},
+
+        onUpdate: (self)=>{console.log("onUpdate", self.progress.toFixed(3))},// 업데이트가 되었을 때 동작함
+        //L> 소수점의 형태로 어느정도 시점에 접근했는지 수수점 3자리의 형태로 설정함
+        onToggle: (self)=>{console.log("onToggle",console.log("onToggle",self.isActive))}
+        //L> 해당 동작이 성공하면 true가 출력되고, 실패하면 false가 출력된다.
+      }
+    });
+  </script>
+
+
+</body>
+</html>

@@ -1,0 +1,53 @@
+1. github를 로그인을 하고 새로운  repositories를 생성한다.
+2. 파일을 이제 저장하고 수정할 수 있다.
+    바로 파일을 긁어서 사용할 수도 있고, 따로 파일을 git으로 보내어서 값을 업데이트할 수도 있다.
+
+  파일을 바로 올리는 경우
+    파일을 긁어서 바로 +모양에 넣으면 자동적으로 파일이 업로드된다.
+    L> 하단에 추가적으로 제목과 세부적인 설명의 값을 넣어서 구성할 수 있다. 
+
+  파일을 바로 git으로 올리는 경우
+    초기에 github에서 알려주는 순서대로 먼저 파일의 값을 구성해야 한다. 
+
+    /*
+      echo "# webstoryboyReact" >> README.md
+      git init
+      git add README.md
+      git commit -m "first commit"
+      git branch -M main
+      git remote add origin https://github.com/ys7520ys/webstoryboyReact.git
+      git push -u origin main
+    */
+
+    -git init
+      현재 디렉토리를 새로운 git 리포지토리로 초기화를 진행한다.
+      .git폴더가 생성되고, 해당 폴더에는 git이 버전 관리를 위해서 필요한 정보들이 저장된다.
+      초기화 후, 현재 디렉토리 파일들을 추적할 수 있다.
+    
+    -git add README.md
+      README.md파일을 스테이징 영역에 추가한다.
+      스테이징 영역은 커밋할 준비가 된 파일을 잠시 저장하는 곳으로 git commit 명령어를 통해 리포지토리에 실제로 반영될 수 있도록 한다. 
+      git add명령어를 통해서 원하는 파일을 추가적으로 구성할 수 있다.
+    L> git-hub를 확인하면 README.md의 값이 추가된 것을 확인할 수 있다.
+
+    -git commit -m "first commit"
+      스테이징된 파일을 리포지토리에 커밋(저장)하고, "first commit"이라는 메시지를 함께 기록한다.
+      커밋 메시지는 
+
+      일반적으로 commit을 진행하는 경우
+        1. 스테이징 영역에 값을 추가해야 한다. 
+           ex git add README.md의 값으로 스테이징 영역에 추가할 수 있다.
+        2. 그런 다음에 커밋 명령어를 실행하여 업데이트를 진행한다.
+           ex git commit -m "추가한 내용에 대한 설명"
+        L> git add를 하지 않고 git commit을 실행하면, git은 스테이징 영역에 추가되지 않은 변경사항을 커밋하지 않는다. 그래서 먼저 git add를 통해서 변경된 파일의 값을 스테이징을 먼저하고, git commit을 통해서 커밋을 완료해야 한다. 
+
+      -git commit -a -m "빠른 커밋 메시지"
+        이미 git에서 추적 중인 파일(한 번이라도 git add로 스테이징한 파일)을 수정하는 경우, -a 옵션을 사용하면 스테이징 없이 바로 커밋할 수 있다.
+
+    -git branch -M main 
+      현재 브랜치를 main이라는 이름으로 변경하는 것이다.
+      -M 옵션은 강제 변경을 의미한다. 예전에는 기본 브랜치의 이름이 master였으나, 최근에 main을 많이 사용한다.
+
+    -git push -u origin main 
+      main 브랜치를 원격 리포지토리(origin)에 푸시하여 업로드한다.
+      -u 옵션은 origin main을 기본 푸시/풀 대상 브랜치로 설정한다. 이후에는 git push만 입력해도 기본 브랜치로 푸시할 수 있다.

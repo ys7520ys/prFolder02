@@ -1,0 +1,20 @@
+설치순서
+  1. nodeJS 다운로드
+  2. vscode 설치
+  3. REACT를 실행할 파일을 하나 생성한다. ex 새폴더
+  4. 생성한 파일을 "shift + 우클릭"으로 세부사항을 열고 "여기에 PowerShell 창 열기"를 누른다. 또는 폴더에서 우클릭을 진행하여 "터미널로 열기"로 실행해도 된다.
+  5. 실행한 터미널에 "npx create-react-app '포르젝트이름'" 이렇게 입력한다.
+    추가적으로 이름을 정할 때 대문자을 사용할 수 없다
+  L> 윈도우: npx create-react-app newReact + enter
+  L> 맥: npx-create-react-app newReact + enter
+    혹시 여기서 비밀번호를 입력하라는 창이 등장하면 맥북 비밀번호를 입력하면 된다
+
+    만약 이러한 생성이 되지 않는 경우
+      window검색창에 "Windows PowerShell"을 검색하여 "관리자 권한으로 실행"을 누른다.
+      L> "Set-ExecutionPolicy Unrestricted"를 입력한다.
+
+HTML에서 추가적으로 다운로드를 통해서 react를 구성해도 되지만 손이 많이간다
+  그래서 Create React App라는 라이브러리의 도움을 받아서 프로젝트를 생성하는 것이 일반적으로 되었다. 
+
+  npm: 라이브러리를 다 모아놓은 플랫폼 같은 것을 뜻한다.
+  L> node.js를 다운로드 할 때 자동적으로 같이 다운로드 된다.

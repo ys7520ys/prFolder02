@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GSAP Example</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js"></script>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+    }
+
+    .text {
+      font-size: 2rem;
+      opacity: 0; /* 초기 상태: 투명 */
+      transform: translateY(50px); /* 초기 상태: 아래로 이동 */
+    }
+  </style>
+</head>
+<body>
+
+  <div class="text">Hello, GSAP!</div>
+
+  <script>
+    // GSAP 애니메이션 적용
+    gsap.to(".text", { // 애니메이션이 적용될 요소를 ".text"로 설정함
+      duration: 1.5,        // 애니메이션 지속 시간
+      opacity: 1,           // 불투명하게 변환
+      y: 0,                 // Y축 이동 (50px 아래에서 원래 위치로 이동)
+      ease: "power3.out"    // 애니메이션 곡선 (부드러운 속도 변화)
+    });
+  </script>
+
+</body>
+</html>

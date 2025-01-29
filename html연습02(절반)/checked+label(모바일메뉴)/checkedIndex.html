@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+    *{
+      box-sizing: border-box;
+      text-decoration: none;
+      list-style: none;
+      color: black;
+    }
+    html{
+      font-family: "Roboto", serif;
+      font-weight: 100;
+      font-style: normal;
+    }
+    .container{
+      height: 100%;
+    }
+    input[id=trigger]{
+      display: none;
+    }
+    label[for=trigger]{
+      top: 2%;
+      z-index: 10;
+      position: absolute;
+      width: 30px;
+      height: 20px;
+      display: block;
+      cursor: pointer;
+      transition: 0.3s;
+      left: 15px;
+    }
+    label[for=trigger] span{
+      position: absolute;
+      display: block;
+      height: 2px;
+      width: 100%;
+      background-color: black;
+      left: 0%;
+      transition: 0.4s;
+    }
+    label[for=trigger] span:nth-child(1){
+      top: 0%;
+    }
+    label[for=trigger] span:nth-child(2){
+      top: 50%;
+    }
+    label[for=trigger] span:nth-child(3){
+      top: 100%;
+    }
+    input[id=trigger]:checked + label span:nth-child(1){
+      transform: rotate(45deg);
+      top: 50%;
+    } 
+    input[id=trigger]:checked + label span:nth-child(2){
+      opacity: 0;
+    } 
+    input[id=trigger]:checked + label span:nth-child(3){
+      transform: rotate(-45deg);
+      top: 50%;
+    }
+    input[id=trigger]:checked ~ .sidebar{
+      left: 0;
+    }
+    input[id=trigger]:checked + label[for=trigger]{
+      left: 60%;
+    }
+
+    .sidebar{
+      width: 60%; /* width의 값을 화면 너비의 60%로 설정하였다. */
+      height: 100vh; /* 화면의 크기에 맞추어서 height의 값을 가득 채운다. */
+      background-color: pink;
+      position: fixed; /* position을 fixed로 설정하여 어떤 스크롤에서도 해당 버튼으로 슬라이드 메뉴를 꺼낼 수 있도록 설정하였다. */
+      top: 0;
+      left: -60%; /* 해당 slide메뉴의 width의 값을 60%로 설정하여 left: -60%만큼 이동시켜서 화면에서 보아지 않도록 설정하였다. */
+      transition: 0.3s; /* 이러한 동작을 부드럽게하기 위해서 transition의 값을 적용하였다. */
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- input의 값을 check박스로 설정하여 클릭시 해당 요소의 스타일의 값이 적용되고, 풀리도록 설정함 -->
+    <input type="checkbox" id="trigger">
+    <!-- label의 값을 클릭하면 input의 checked속성으로 인하여 하단의 slidebar영역이 펼쳐진다. -->
+    <label for="trigger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </label>
+    <div class="sidebar"></div>
+  </div>
+</body>
+</html>

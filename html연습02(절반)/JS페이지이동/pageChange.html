@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    *{
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+      text-decoration: none;
+      list-style: none;
+    }
+    header{
+      height: 100px;
+      background-color: #ccc;
+    }
+    aside{
+      height: 300px;
+      width: 30%;
+      background-color: #ddd;
+      float: left;
+    }
+    main{
+      height: 300px;
+      width: 70%;
+      background-color: #eee;
+      float: left;
+    }
+    .prevPage, .nextPage{
+      padding: 10px 20px;
+      font-size: 40px;
+      font-weight: bold;
+      color: #3c3c3c;
+    }
+    .prevPage{
+      float: left;
+    }
+    .nextPage{
+      float: right;
+    }
+    footer{
+      clear: both;
+      height: 200px;
+      background-color: #bbb;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div onclick="history.back()" class="prevPage"><</div>
+      <div onclick="history.forward()" class="nextPage">></div>
+    </header>
+    <aside></aside>
+    <main>
+      <!-- 상단의 url을 변경하여 페이지를 전환할 수도 있다. -->
+      <a href="/firstPage" onclick="location.href='firstPage.html'">first</a>
+      <a href="/secondPage" onclick ="location.href='secondPage.html'">second</a>
+      <div class="currentPage">NOW</div>
+    </main>
+    <footer></footer>
+  </div>
+</body>
+</html>
