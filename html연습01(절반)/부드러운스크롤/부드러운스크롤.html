@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smooth Scroll Example</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.3/dist/locomotive-scroll.min.css" />
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      font-family: Arial, sans-serif;
+    }
+
+    .content {
+      height: 100vh;
+      position: relative;
+      font-size: 2rem;
+      color: #333;
+      border: solid 5px red;
+      box-sizing: border-box;
+    }
+  </style>
+</head>
+<body data-scroll-container>
+
+  <!-- 콘텐츠 영역 -->
+  <div class="content" data-scroll-section data-scroll-speed="">Fast Scrolling Section</div>
+  <div class="content" data-scroll-section data-scroll-speed="">Medium Scrolling Section</div>
+  <div class="content" data-scroll-section data-scroll-speed="">Slow Scrolling Section</div>
+
+  <!-- Locomotive Scroll 스크립트 -->
+  <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.2/dist/locomotive-scroll.min.js"></script>
+    <!-- jsDelivr 사이트에서 이러한 cdn의 값을 가져올 수 있다. 추가적으로 다른 다양한 것들도 존재한다 -->
+    <!-- https://www.jsdelivr.com/package/npm/locomotive-scroll -->
+      <!-- Locomotive Scroll을 사용함으로 브라우저의 스크롤바가 화면에 나타나지 않는다. -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const scroll = new LocomotiveScroll({
+        el: document.querySelector("[data-scroll-container]"),
+        smooth: true,
+        multiplier: 0.5 // 스크롤 속도 조절
+      });
+    });
+  </script>
+
+</body>
+</html>

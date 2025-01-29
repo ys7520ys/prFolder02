@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smooth Follow Cursor</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden; /* 화면 넘침 방지 */
+      cursor: none; /* 기본 커서 숨김 */
+    }
+
+    .cursor {
+      width: 20px;
+      height: 20px;
+      background-color: rgba(0, 0, 0, 0.8);
+      border-radius: 50%;
+      position: absolute;
+      pointer-events: none; /* 마우스 이벤트 무시 */
+      transform: translate(-50%, -50%);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 커스텀 커서 -->
+  <div class="cursor" id="cursor"></div>
+
+  <script>
+    const cursor = document.getElementById("cursor");
+
+    // 마우스 목표 위치와 실제 커서 위치 초기화
+    let mouseX = 0, mouseY = 0;
+    let cursorX = 0, cursorY = 0;
+    const speed = 0.1; // 커서가 따라오는 속도 (0.1이 느리고, 1에 가까울수록 빠름)
+
+    // 마우스 위치 업데이트
+    document.addEventListener("mousemove", (e) => {
+      mouseX = e.pageX;
+      mouseY = e.pageY;
+    });
+
+    // requestAnimationFrame을 이용해 커서 위치 애니메이션
+    function animate() {
+      // 현재 커서 위치와 목표 위치 사이의 보간
+      cursorX += (mouseX - cursorX) * speed;
+      cursorY += (mouseY - cursorY) * speed;
+
+      // 스타일 업데이트
+      cursor.style.left = `${cursorX}px`;
+      cursor.style.top = `${cursorY}px`;
+
+      requestAnimationFrame(animate);
+    }
+
+    // 애니메이션 시작
+    animate();
+  </script>
+
+</body>
+</html>

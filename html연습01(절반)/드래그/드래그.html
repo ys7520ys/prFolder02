@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .drag-item {
+      width: 150px;
+      height: 150px;
+      background-color: #4CAF50;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 20px;
+      cursor: pointer;
+    }
+
+    .drop-zone {
+      width: 300px;
+      height: 200px;
+      border: 2px dashed #4CAF50;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #4CAF50;
+    }
+  </style>
+</head>
+<body>
+  <div class="drop-zone">드롭할 영역</div>
+  <div class="drag-item" draggable="true" id="draggable">드래그할 요소</div>
+  <script>
+    // 드래그할 요소 선택
+    const dragItem = document.getElementById("draggable");
+
+    // 드롭할 영역 선택
+    const dropZone = document.querySelector(".drop-zone");
+
+    // 드래그 시작 이벤트
+    // "dragstart" 이벤트는 사용자가 요소를 드래그하기 시작하면 동작한다.
+    dragItem.addEventListener("dragstart", (e) => {
+      e.dataTransfer.setData("text/plain", e.target.id);
+      // 현재 드래그를 진행한 요소의 id의 값을 통해서 drag를 진행한다
+      e.target.style.opacity = 0.5; // 드래그 중 시각적 효과
+      // 드래그가 진행되는 동안에 해당 요소의 style을 변경한 것이다.
+    });
+
+    // 드래그 종료 이벤트
+    // "dragend" 이벤트는 사용자가 드래그를 놓으면 동작한다
+    dragItem.addEventListener("dragend", (e) => {
+      e.target.style.opacity = 1; // 드래그가 끝나면 원래 상태로 복구
+      // 드래그가 끝나면 적용할 style의 값을 설정한 것이다.
+    });
+
+    // 드롭 영역에서 드래그한 요소가 위에 있을 때
+    dropZone.addEventListener("dragover", (e) => {
+      e.preventDefault(); // 기본 동작 방지하여 드롭 가능하게 만듦
+      e.target.style.backgroundColor = "#f1f1f1"; // 드롭 가능 시 효과
+    });
+
+    // 드롭 영역을 떠날 때
+    dropZone.addEventListener("dragleave", (e) => {
+      e.target.style.backgroundColor = ""; // 배경색 초기화
+    });
+
+    // 드롭 이벤트
+    dropZone.addEventListener("drop", (e) => {
+      e.preventDefault();
+      const draggedElementId = e.dataTransfer.getData("text/plain");
+      const draggedElement = document.getElementById(draggedElementId);
+      e.target.appendChild(draggedElement); // 드래그한 요소를 드롭 영역에 추가
+      e.target.style.backgroundColor = ""; // 드롭 후 배경색 초기화
+    });
+
+  </script>
+</body>
+</html>

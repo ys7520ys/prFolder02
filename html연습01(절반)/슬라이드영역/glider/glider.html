@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Glider.js Example</title>
+  <!-- Glider.js CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glider-js@1/glider.min.css">
+  <style>
+    *{
+      box-sizing: border-box;
+    }
+    body {
+      overflow: hidden;
+    }
+    .glider div {
+      height: 200px;
+      border: solid 2px black;
+    }
+  </style>
+</head>
+<body>
+
+<div class="glider-container" style="width: 100%; overflow: hidden;">
+  <div class="glider">
+    <div style="background: #eee;">슬라이드 1</div>
+    <div style="background: #ccc;">슬라이드 2</div>
+    <div style="background: #aaa;">슬라이드 3</div>
+  </div>
+</div>
+
+<div role="tablist" class="dots"></div>
+
+<button aria-label="Previous" class="glider-prev">«</button>
+<button aria-label="Next" class="glider-next">»</button>
+
+<!-- Glider.js JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/glider-js@1/glider.min.js"></script>
+
+<!-- Glider 초기화 스크립트 -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    new Glider(document.querySelector('.glider'), {
+      slidesToShow: 1,
+      scrollLock: true,
+      animationDuration: 0.5,
+      dots: '.dots',
+      draggable: true,
+      arrows: {
+        prev: '.glider-prev',
+        next: '.glider-next'
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seamless Infinite Scrolling Logos</title>
+<!-- 이미지의 값을 슬라이드의 형태로 구성하는 경우 -->
+ 
+<style>
+  /* 슬라이더 컨테이너 스타일 */
+  .logo-slider {
+    overflow: hidden;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+
+  /* 로고 슬라이드 스타일 */
+  .logo-track {
+    display: inline-flex;
+    animation: scroll 15s linear infinite;
+  }
+
+  /* 개별 로고 스타일 */
+  .logo {
+    width: 100px; /* 로고 크기 조정 */
+    margin: 0 20px;
+  }
+
+  /* 애니메이션 정의 */
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- 로고 슬라이더 HTML -->
+<div class="logo-slider">
+  <div class="logo-track">
+    <!-- 로고 목록 2번 반복 -->
+    <img src="logo1.png" alt="Logo 1" class="logo">
+    <img src="logo2.png" alt="Logo 2" class="logo">
+    <img src="logo3.png" alt="Logo 3" class="logo">
+    <img src="logo4.png" alt="Logo 4" class="logo">
+    <img src="logo1.png" alt="Logo 1" class="logo">
+    <img src="logo2.png" alt="Logo 2" class="logo">
+    <img src="logo3.png" alt="Logo 3" class="logo">
+    <img src="logo4.png" alt="Logo 4" class="logo">
+  </div>
+  <div class="logo-track">
+    <!-- 로고 목록 2번 반복 - 두 번째 트랙 -->
+    <img src="logo1.png" alt="Logo 1" class="logo">
+    <img src="logo2.png" alt="Logo 2" class="logo">
+    <img src="logo3.png" alt="Logo 3" class="logo">
+    <img src="logo4.png" alt="Logo 4" class="logo">
+    <img src="logo1.png" alt="Logo 1" class="logo">
+    <img src="logo2.png" alt="Logo 2" class="logo">
+    <img src="logo3.png" alt="Logo 3" class="logo">
+    <img src="logo4.png" alt="Logo 4" class="logo">
+  </div>
+</div>
+
+</body>
+</html>

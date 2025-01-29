@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>로딩 애니메이션 예제</title>
+  <style>
+    /* 로딩 화면 스타일 */
+    .loading-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #f1f1f1;
+      z-index: 10;
+      opacity: 1;
+      transition: opacity 0.7s;
+      flex-direction: column;
+    }
+    /* 퍼센트 텍스트 스타일 */
+    .percent {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+    /* 프로그레스 바 스타일 */
+    .progress-bar {
+      width: 80%;
+      height: 20px;
+      background-color: #ddd;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .progress {
+      width: 0;
+      height: 100%;
+      background-color: #3498db;
+      border-radius: 10px;
+      transition: width 0.1s ease;
+    }
+    .mainPage{
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;  
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 로딩 화면 -->
+  <div class="loading-screen" id="loadingScreen">
+    <div class="percent" id="percentText">0%</div>
+    <div class="progress-bar">
+      <div class="progress" id="progress"></div>
+    </div>
+  </div>
+  <div class="mainPage">메인페이지</div>
+  <script>
+    let percent = 0;
+    const percentText = document.getElementById("percentText");
+    const progress = document.getElementById("progress");
+    const loadingScreen = document.getElementById("loadingScreen");
+
+    const interval = setInterval(() => {
+      // 퍼센트 증가
+      percent++;
+      percentText.textContent = `${percent}%`;
+      progress.style.width = `${percent}%`;
+
+      // 100%에 도달 시 로딩 화면 제거
+      if (percent >= 100) {
+        clearInterval(interval);
+        loadingScreen.style.opacity = 0;  // 페이드아웃 효과
+        setTimeout(() => {
+          loadingScreen.style.display = "none";
+        }, 500);
+      }
+    }, 15); // 로딩 속도 조절
+  </script>
+
+</body>
+</html>

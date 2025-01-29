@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    /* 여기서 추가적으로 자식에 float속성이 있을 때, 부모는 높이를 잃는다.
+    그래서 부모에 overflow: hidden을 넣어서 높이를 찾아야 한다. */
+    .parent{
+      width: 800px;
+      border: 5px solid black;
+      overflow: hidden;
+    }
+    .child{
+      height: 200px;
+      width: calc(800px / 3);
+      float: left;
+    }
+    .child:nth-child(1){
+      background-color: #bbb;
+    }
+    .child:nth-child(2){
+      background-color: #ccc;
+    }
+    .child:nth-child(3){
+      background-color: #ddd;
+    }
+  </style>
+</head>
+<body>
+  <div class="parent">
+    <div class="child"></div>
+    <div class="child"></div>
+    <div class="child"></div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,111 @@
+aira-live:
+  화면의 일부 내용이 동적으로 업데이트될 떄, 스크린리더가 사용자에게 이러한 변화를 알리기 위해서 사용된다. 
+
+  aria-live = "polite":
+    사용자가 현재 작업에 집중하는 동안에 중요한 인터페이스 업데이트가 필요할 때 사용한다.
+    ex 장바구니에 항목을 추가할 때 장바구니에 상품이 추가된 경우 => "상품이 추가되었습니다" 같은 메세지를 표기하는 경우
+
+  aria-live="assertive":
+    즉시 사용자에게 중요한 업데이트 내용을 전달해야 하는 경우
+    ex 오류 메세지 or 긴급한 정보가 화면에 표기될 때
+    L> 이 경우 스크린리더는 현재 읽고 있던 내용을 멈추고 업데이트 내용을 바로 알린다. 
+  
+  aria-live="off":
+    업데이트된 내용이 스크린 리더 사용자에게 굳이 전달되지 않아도 되는 경우에 사용된다.
+    스크린리더는 이러한 경우에 변화를 알리지 않는다. 
+
+  L> 일반적으로 동적인 콘텐츠가 발생할 때 특히 사용자에게 중요한 피드백을 제공해야 하는 경우에 aria-live속성을 사용하여 접근성을 높힐 수 있다.
+
+
+
+
+
+
+
+
+
+
+aira-label (id는 사용가능, class 사용 불가능)
+  id의 값으로만 참조할 수 있다. 
+  aira-labelledby의 값과 동일한 id의 값으로 작성한 요소의 텍스트의 값을 통해서 참조를 진행한다.
+
+  1.예시
+    /*
+      <span id="save-button-label">저장하기</span>
+      <button aria-labelledby="save-button-label">
+        <img src="save-icon.png" alt="" />
+      </button>
+    */
+
+  코드설명
+    해당 button에는 aria-labelledby 속성이 존재한다. aria-labelledby="save-button-label" 속성을 통해 버튼의 레이블을 save-button-label이라는 id의 값을 가진 <span> 요소의 텍스트 "저장하기"로 지정한다.
+  
+  동작
+    스크린리더는 이 버튼을 "저장하기"라고 읽어준다. 이로 인하여 사용자는 아이콘이 단순히 그림이 아닌 "저장" 기능을 가진다는 것을 알 수 있다.
+
+  ----------
+
+  2.예시
+    /*
+      <h2 id="product-title">스마트폰</h2>
+      <p id="product-price">가격: 500,000원</p>
+      <div role="group" aria-labelledby="product-title product-price">
+        <button>구매하기</button>
+      </div>
+    */
+
+  코드설명  
+    aria-labelledby="product-title product-price" 는 product-title과 product-price 라는 id의 값을 가진 요소들의 텍스트를 결합하여 <div role="group">의 레이블로 사용한다.
+
+  동작
+    스크린리더는 이 그룹을 "스마트폰, 가격: 5000원"으로 읽는다. 사용자에게 정보와 가격이 함께 제공되어, 어떠한 제품을 구매하는지 명확히 구분할 수 있다.
+
+  ----------
+
+  3.예시
+    /*
+      <button aria-label="검색하기">
+        <img src="search-icon.png" alt="" />
+      </button>
+    */
+
+  코드설명
+    aria-label="검색하기" 를 사용하여 스크린리더가 "검색하기"라는 레이블을 제공한다. 
+  
+  동작
+    스크린리더는 이 버튼을 "검색하기"라고 읽어주며, 사용자가 아이콘 버튼이 기능을 정확히 파악할 수 있도록 돕는다.
+
+  ----------
+
+  4.예시
+    /*
+      <div role="dialog" aria-labelledby="dialog-title">
+        <h1 id="dialog-title">알림</h1>
+        <p>로그인이 필요합니다.</p>
+        <button>확인</button>
+      </div>
+    */
+
+  코드설명 
+    aria-labelledby="dialog-title" 를 통해서 다이얼로그의 제목을 dialog-title라는 id를 가진 <h1> 요소의 텍스트 "알림"으로 설정한다.
+
+  동작
+    스크린리더는 이 다이얼로그의 제목을 "알림"으로 인식하여 사용자에게 알려주며, 다이얼로그의 용도를 쉽게 파악할 수 있다.
+
+
+
+
+
+aria-labelledby:
+  다른 요소에 있는 텍스트를 이용하여 특정 요소의 이름을 제공할 때 사용된다.
+  이 속성은 주로 사용자 인터페이스 내에서 추가적인 설명이 필요한 경우에 텍스트 대신 별도의 요소를 참조하여 이름을 설정하고자 할 때 사용된다. 
+
+  폼 요소에 레이블을 제공
+    폼 요소(input, textarea 등)에 직접 텍스트 레이블을 제공할 수 있지만, 때로는 기존의 텍스트 외에 구체적인  설명이 필요할 수도 있다.
+
+    ex <input id="username" aria-labelledby="username-label" />
+
+    username-label 이라는 아이디를 가진 요소(일반적으로 <label id="username-label">사용자 이름</label)가 input의 레이블 역할을 하게 된다.
+
+  여러 요소를 조합하여 레이블링
+    aria-labelledby 속성은 여러 요소의 id를 공백으로 구분하여 연결할 수 있다.

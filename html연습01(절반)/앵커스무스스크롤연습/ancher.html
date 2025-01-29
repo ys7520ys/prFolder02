@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="ancherStyle.css">
+  <script src="js/jquery-3.4.1.min.js"></script>
+  <script src="js/jquery.scrollTo.min.js"></script>
+  <title>a앵커만들기</title>
+  <!-- 
+    1. 먼저 a태그에 href #의 값으로 이름 지정하기
+    2. 찾아갈 요소에 id의 값을 #이름과 동일하게 지정하기 + 추가로 최상단 버튼은 href #으로 설정
+    3. 플러그인을 넣고 하단에 script를 추가하기
+    만약 인터넷익스플로러 동작을 제외한다면 html{scroll-behavior: smooth}를 사용해도 된다.
+  -->
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+      *{
+        text-decoration: none;
+        list-style: none;
+        box-sizing: border-box;
+      }
+
+      /* html{
+        scroll-behavior: smooth;
+        /* 이렇게 구성해도 동작은 제대로 이루어지지만 인터넷익스플로러에서는 동작하지 않을 것이다 
+      } */
+
+      body{
+        font-family: "Playfair Display", serif;
+        font-optical-sizing: auto;
+        font-weight: 400;
+        font-style: normal;
+      }
+      body h1{
+        font-weight: normal;
+      }
+      body h1:not(:first-of-type){
+        padding-top: 40vh;
+      }
+
+      header a{
+        background-color: #3c3c3c;
+        color: white;
+        padding: 5px 10px;
+        text-transform: uppercase;
+      }
+
+      body p{
+        font-size: 1.3em;
+        line-height: 1.9em;
+      }
+
+      .btn-gototop{
+        background-color: white;
+        box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);
+        padding: 5px 15px;
+        color: black;
+        font-weight: 600;
+        font-size: 1em;
+      }
+    </style>
+  </head>
+<body>
+  <div class="container">
+    <header>
+      <a href="#part1">html part</a>
+      <a href="#part2">css part</a>
+      <a href="#part3">jquery part</a>
+      <a href="#part4">protfolio part</a>
+    </header>
+    <h1 id="part1">html part</h1>
+    <hr>
+    <p>
+      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tenetur dolorem, vel ipsam magnam sunt culpa incidunt, labore perferendis facere omnis quisquam voluptatum inventore, nemo reiciendis laudantium molestiae ratione accusantium! Sequi!
+    </p>
+    <a class="btn-gototop" href="#">GO TO TOP</a> <!--#을 넣으면 최상단을 의미하게 된다-->
+    <h1 id="part2">css part</h1>
+    <hr>
+    <p>
+      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tenetur dolorem, vel ipsam magnam sunt culpa incidunt, labore perferendis facere omnis quisquam voluptatum inventore, nemo reiciendis laudantium molestiae ratione accusantium! Sequi!
+    </p>
+    <a class="btn-gototop" href="#">GO TO TOP</a> <!--최상단 이동을 위한 지표-->
+    <h1 id="part3">jquery part</h1>
+    <hr>
+    <p>
+      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tenetur dolorem, vel ipsam magnam sunt culpa incidunt, labore perferendis facere omnis quisquam voluptatum inventore, nemo reiciendis laudantium molestiae ratione accusantium! Sequi!
+    </p>
+    <a class="btn-gototop" href="#">GO TO TOP</a> <!--최상단 이동을 위한 지표-->
+    <h1 id="part4">portfolio part</h1>
+    <hr>
+    <p>
+      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tenetur dolorem, vel ipsam magnam sunt culpa incidunt, labore perferendis facere omnis quisquam voluptatum inventore, nemo reiciendis laudantium molestiae ratione accusantium! Sequi!
+    </p>
+    <a class="btn-gototop" href="#">GO TO TOP</a> <!--최상단 이동을 위한 지표-->
+  </div>
+
+  <!-- smooth scroll -->
+  <script>
+    $('header a, .btn-gototop').click(function(){
+      $.scrollTo(this.hash || 0, 500);
+      e.preventDefault();
+    })
+  </script>
+</body>
+</html>

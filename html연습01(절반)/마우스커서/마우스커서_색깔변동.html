@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fixed Position Cursor</title>
+  <style>
+    html, body {
+      margin: 0;
+      height: 400vh;
+      cursor: none;
+    }
+
+    .cursor {
+      width: 20px;
+      height: 20px;
+      background-color: rgba(0, 0, 0, 0.8);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      transition: background-color 0.2s; /* 색상 변경 애니메이션 */
+    }
+
+    /* 색상 변경을 확인할 테스트 박스 */
+    .hover-area {
+      width: 200px;
+      height: 200px;
+      background-color: lightgray;
+      margin: 100px auto;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cursor" id="cursor"></div>
+  <div class="hover-area"></div> <!-- 색상 변경을 테스트할 요소 -->
+
+  <script>
+    const cursor = document.getElementById("cursor");
+    const hoverArea = document.querySelector(".hover-area");
+    // 마우스가 들어가면 커서의 색깔이 변경될 영역을 변수의 값으로 설정
+
+    let mouseX = 0, mouseY = 0;
+    let cursorX = 0, cursorY = 0;
+    const speed = 0.1;
+
+    document.addEventListener("mousemove", (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
+
+    function animate() {
+      cursorX += (mouseX - cursorX) * speed;
+      cursorY += (mouseY - cursorY) * speed;
+      cursor.style.left = `${cursorX}px`;
+      cursor.style.top = `${cursorY}px`;
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+
+
+    // 초기의 값과 나중의 값을 두 개의 addEventLister를 통해서 설정하였다.
+    // 마우스가 요소 위로 올라갔을 때 커서 색상 변경
+    hoverArea.addEventListener("mouseenter", () => {
+      // 상단에서 설정한 변수의 영역에 들어가면 함수의 값이 동작한다
+      cursor.style.backgroundColor = "red"; // 원하는 색상으로 변경
+    });
+
+    // 마우스가 요소에서 나갔을 때 커서 색상 복원
+    hoverArea.addEventListener("mouseleave", () => {
+      cursor.style.backgroundColor = "rgba(0, 0, 0, 0.8)";
+    });
+  </script>
+
+</body>
+</html>

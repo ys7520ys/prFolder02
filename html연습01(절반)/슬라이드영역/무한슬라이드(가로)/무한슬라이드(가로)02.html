@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Infinite Scrolling Text</title>
+<!-- 텍스트의 값을 슬라이드의 형태로 구성하는 경우 -->
+
+<style>
+  /* googlefont */
+  @import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gothic+A1:wght@100;200;300;400;500;600;700;800;900&family=Noto+Sans+KR:wght@100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+  /* html */
+  html{
+    font-family: "Roboto", serif;
+    font-weight: 700;
+    font-style: normal;
+  }
+
+  /* 슬라이더 컨테이너 스타일 */
+  .text-slider {
+    overflow: hidden;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    position: relative;
+    font-size: 10rem;
+    padding: 20px;
+    border: solid 1px red;
+  }
+
+  /* 텍스트 트랙 스타일 */
+  .text-track {
+    display: inline-flex;
+    gap: 10px;
+    animation: scrollText 30s linear infinite;
+    border: solid 5px blue;
+  }
+  .text-track span {
+    letter-spacing: 2px;
+    word-spacing: 1px;
+  }
+
+  /* 애니메이션 정의 */
+  @keyframes scrollText {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="text-slider">
+  <div class="text-track">
+    <!-- 텍스트 목록을 반복하여 자연스러운 스크롤 구현 -->
+    <span>Welcome to Our Website!</span>
+    <span>We Offer Great Deals!</span>
+    <span>Check Out Our Latest Collection!</span>
+    <span>Follow Us on Social Media!</span>
+    <!-- 텍스트 반복 -->
+    <span>Welcome to Our Website!</span>
+    <span>We Offer Great Deals!</span>
+    <span>Check Out Our Latest Collection!</span>
+    <span>Follow Us on Social Media!</span>
+  </div>
+</div>
+
+</body>
+</html>

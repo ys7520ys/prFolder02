@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <!-- 스크린리더기가 한글로 읽을 수 있도록 한국어로 변경하였다 -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>웹 접근성 준수 예제</title>
+    <style>
+        /* 알림 메시지를 기본적으로 숨김 처리하여 스크린리더가 불필요하게 읽지 않도록 설정 */
+        .alert {
+          display: none;
+          background-color: #f9f9f9;
+          padding: 10px;
+          margin-top: 10px;
+          border: 1px solid #ddd;
+        }
+        /* 알림 메시지를 표시하기 위한 클래스 */
+            /* addClass, removeClasss를 통해서 동작시킨다. */
+        .show {
+          display: block;
+        }
+    </style>
+</head>
+<body>
+
+<h1>웹 접근성 준수 알림 예제</h1>
+
+<!-- 접근성을 위한 버튼 -->
+<!-- aria-controls: 해당 버튼이 컨트롤하는 요소의 ID를 지정하여 관계를 정의 -->
+<!-- aria-expanded: 버튼이 확장(클릭 시 알림 표시) 또는 축소 상태임을 나타냄 -->
+<button aria-controls="alert-message" aria-expanded="false" id="toggleButton">알림 표시</button>
+    <!-- aria-expanded의 값이 true인 경우에만 알림메세지를 읽는다. false인 경우에는 읽지 않는다. -->
+
+<!-- ARIA 속성을 통해 알림을 인식하도록 설정 -->
+<!-- role="alert": 알림 역할을 지정하여 스크린 리더가 자동으로 메시지를 인식하게 함 -->
+<!-- aria-live="assertive": 메시지가 추가되었을 때 즉시 사용자에게 알림 -->
+<div role="alert" id="alert-message" class="alert" aria-live="assertive">
+    접근성 준수를 위한 알림 메시지입니다!
+</div>
+
+<script>
+    const toggleButton = document.getElementById('toggleButton');
+    /* 버튼으로 동작할 요소의 값을 설정함 */
+    const alertMessage = document.getElementById('alert-message');
+    /* 버튼에 의해서 동작을 받는 요소의 값을 설정함 */
+    toggleButton.addEventListener('click', () => {
+        // aria-expanded 속성을 통해 버튼 상태를 확인
+        const isExpanded = toggleButton.getAttribute('aria-expanded') === 'true';
+            // aria-expanded 속성의 값을 가져와서 "isExpanded"변수에 저장한다.
+            // L> 이제 isExpande
+        // 버튼의 aria-expanded 상태 업데이트
+        toggleButton.setAttribute('aria-expanded', !isExpanded);
+            // 만약에 isExpanded의 값이 false라면 
+        // 알림 메시지 표시/숨김 처리 및 클래스 업데이트
+        if (isExpanded) {
+            // 버튼이 확장 상태라면 숨김
+            alertMessage.classList.remove('show');
+        } else {
+            // 버튼이 축소 상태라면 알림 표시
+            alertMessage.classList.add('show');
+        }
+    });
+</script>
+
+</body>
+</html>

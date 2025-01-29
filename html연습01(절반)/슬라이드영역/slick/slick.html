@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- Slick CSS & JavaScript -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+  <!-- slick을 사용하려면 파일을 연동해야 한다. -->
+  <style>
+    *{
+      box-sizing: border-box;
+    }
+    .slick-slider div{
+      height: 100px;
+      background-color: #3c3c3c;
+      border: solid 2px white;
+    }
+  </style>
+</head>
+<body>
+  <!-- HTML -->
+  <div class="slick-slider">
+    <div>슬라이드 1</div>
+    <div>슬라이드 2</div>
+    <div>슬라이드 3</div>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    $('.slick-slider').slick({
+      autoplay: true, // 자동 슬라이드 기능 활성화
+      autoplaySpeed: 2000, // 슬라이드 간 전환 속도 설정
+      dots: true, // 하단에 현재 슬라이드 위치를 표시하는 점 추가
+      arrows: true, // 좌우 화살표 제거
+      infinite: true, // 무한으로 슬라이드가 동작하도록 설정
+      speed: 300, // 속도를 300ms로 설정
+      slidesToShow: 1 // 슬라이더 화면에 몇 개의 슬라이드를 보여줄 것인지 설정한다.
+    });
+  </script>
+</body>
+</html>

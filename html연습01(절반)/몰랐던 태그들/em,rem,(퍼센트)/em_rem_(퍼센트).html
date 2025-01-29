@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+    *{
+      padding: 0;
+      margin: 0;
+      text-decoration: none;
+      list-style: none;
+    }
+    /* rem의 값은 html의 font-size에 따라서 크기가 결정된다. */
+    html{
+      font-family: "Noto Sans KR", sans-serif;
+      font-optical-sizing: auto;
+      font-weight: 300;
+      font-style: normal;
+      font-size: 20px;
+    }
+    body{
+      /* font-size: 16px; */ /* 기본적인 font-size의 값이 16px로 구성되었기 때문에 변화X */
+    }
+    .container{
+      padding: 20px 10px;
+    }
+    header{
+      text-align: center;
+    }
+    header h1{
+      font-size: 3em;
+    }
+    header p{
+      font-weight: 400;
+      margin-left: 5px;
+    }
+    h1+p{
+      margin-bottom: 20px;
+    }
+
+    /* 이렇게 부모의 값을 고정하고 자식들의 값을 em으로 설정하면
+    자식들의 값은 부모의 값을 따라서 동작하기 때문에 따로 자식의 값을 설정할 필요가 없다. */
+    .box-em{
+      margin-bottom: 40px;
+      font-size: 20px;
+    }
+    .box-em p{
+      font-size: 1em;
+      line-height: 1.5em;
+    }
+
+    .box-rem{
+      margin-bottom: 40px;
+      font-size: 40px;
+    }
+    .box-rem p{
+      /* 이렇게 em의 값을 사용하면 부모인 40px의 절반인 20px의 값으로 설정되지만,
+      rem을 사용하면 html{ font-size: 20px} 의 절반인 10px의 값을 크기로 가진다. */
+      font-size: 0.75rem;
+      /* 15를 20으로 나누었을 때 나오는 값을 rem으로 설정하였다. */
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>폰트사이즈</h1>
+      <p>px | em | rem</p>
+    </header>
+    <section>
+      <div class="box-em">
+        <h1>em</h1>
+        <p>
+          행정각부의 장은 국무위원 중에서 국무총리의 제청으로 대통령이 임명한다. 대법원장과 대법관이 아닌 법관의 임기는 10년으로 하며, 법률이 정하는 바에 의하여 연임할 수 있다. 선거에 관한 경비는 법률이 정하는 경우를 제외하고는 정당 또는 후보자에게 부담시킬 수 없다. 행정권은 대통령을 수반으로 하는 정부에 속한다.
+        </p>
+      </div>
+      <div class="box-rem">
+        <h1>rem</h1>
+        <p>
+          행정각부의 장은 국무위원 중에서 국무총리의 제청으로 대통령이 임명한다. 대법원장과 대법관이 아닌 법관의 임기는 10년으로 하며, 법률이 정하는 바에 의하여 연임할 수 있다. 선거에 관한 경비는 법률이 정하는 경우를 제외하고는 정당 또는 후보자에게 부담시킬 수 없다. 행정권은 대통령을 수반으로 하는 정부에 속한다.
+        </p>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

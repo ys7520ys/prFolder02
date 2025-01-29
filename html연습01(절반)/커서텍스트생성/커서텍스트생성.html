@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Typing Animation Example</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      /* L> 상단의 3개 속성으로 요소의 값을 화면의 중앙으로 설정함 */
+
+      min-height: 100vh;
+      background-color: #f5f5f5;
+      font-family: Arial, sans-serif;
+      font-size: 2rem;
+      color: #000000;
+    }
+
+    /* 깜박이는 커서 효과 */
+    .typing-text::after {
+      content: "|"; /* 가상 요소의 값으로 |를 생성함 */
+      animation: blink 0.9s steps(10) infinite; /* blink 애니메이션을 호출, step(1)을 통해서 한 글자씩 동작, infinite로 무한으로 동작 */
+      font-weight: bold;
+      font-size: 3rem;
+      color: black;
+    }
+
+    @keyframes blink {
+      50% { opacity: 0; }
+      /* opacity의 값을 0으로 설정하여 커서가 화면에서 사라지고 다시 등장하는 애니메이션을 구성한다 */
+    }
+  </style>
+</head>
+<body>
+
+  <div class="typing-text" id="typingText"></div>
+  <!-- 타이핑이 나타날 요소의 값을 설정 -->
+
+  <script>
+    // 타이핑 효과를 위한 텍스트와 변수 설정
+    const text = "반갑다 나는 사람이다. 너는....몰라"; // 타이핑될 텍스트
+    const typingSpeed = 130; // 타이핑 속도 (밀리초)
+    let index = 0; // 현재 출력 중인 글자의 인덱스 위치를 나타낸다
+
+    function type() {
+      // 텍스트가 한 글자씩 추가됩니다.
+      document.getElementById("typingText").textContent = text.slice(0, index);
+        // 텍스트의 처음부터 index위치까지의 문자열을 잘라서 typingText 요소의 텍스트 콘텐츠로 설정한다 => 한 글자씩 출력가능
+      index++; // 다음에 호출할 때 한 글자를 추가해서 화면에 보이도록 만든다.
+
+      // 텍스트가 끝날 때까지 재귀 호출
+      if (index <= text.length) { // index가 텍스트 길이에 도닥할 때까지 setTimeout을 사용해서 함수를 반복적으로 호출하여 타이핑의 효과를 진행한다.
+        setTimeout(type, typingSpeed); // 상단에서 선언한 typingSpeed의 값이 해당 setTimeout의 지연시간을 맡는다. 그리고 계속해서 type()함수를 호출한다.
+      }
+    }
+
+    // 타이핑 효과 시작
+    type();
+  </script>
+
+</body>
+</html>

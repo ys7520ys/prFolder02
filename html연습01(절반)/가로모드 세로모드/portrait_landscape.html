@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    @media (orientation: portrait) {
+      /* 가로 모드일 때 적용할 CSS를 작성하기 */
+    }
+    @media (orientation: landscape) {
+      /* 세로 모드일 때 적용할 CSS를 작성하기 */
+    }
+  </style>
+</head>
+<body>
+  <script>
+    if (window.matchMedia('(orientation: portrait)').matches) {
+      // Portrait 모드일 때 실행할 스크립트를 작성한다
+      // 폭과 높이가 동일하면 Portrait 모드로 인식된다
+    } else {
+      // Landscape 모드일 때 실행할 스크립트
+    }
+
+    if (window.innerWidth <= window.innerHeight) {
+      // Portrait 모드일 때 실행할 스크립트
+    } else {
+      //Landscape 모드일 때 실행할 스크립트
+    }
+
+    window.addEventListener('resize',function(){
+      if (window.matchMedia('(orientation: portrait)').matches) {
+        // Portrait 모드일 때 실행할 스크립트
+        // 폭과 높이가 같으면 Portrait 모드로 인식함
+      } else {
+        // Landscape 모드일 때 실행할 스크립트
+      }
+    });
+  </script>
+</body>
+</html>

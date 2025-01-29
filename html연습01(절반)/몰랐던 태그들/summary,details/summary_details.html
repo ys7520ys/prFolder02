@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    /* details 태그의 전체 스타일 */
+    details {
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 10px;
+      width: 300px;
+      margin: 10px 0;
+    }
+
+    /* summary 태그의 스타일 */
+    summary {
+      font-weight: bold;
+      cursor: pointer;
+      color: #333;
+    }
+
+    /* summary 태그에 마우스를 올렸을 때 스타일 */
+    summary:hover {
+      color: #007bff;
+    }
+
+    /* 펼쳐진 상태의 details 안에 있는 p 태그 스타일 */
+    details[open] p {
+      color: #555;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <details>
+    <summary>더보기</summary>
+    <p>이 내용은 사용자가 '더보기'를 클릭하면 표시됩니다.</p>
+  </details>
+</body>
+</html>

@@ -1,0 +1,4 @@
+가상클래스 before, after
+
+    폼 엘리먼트는 before, after를 가질 수 없다(form, input, button)
+    가상클래스를 사용할 때는 content: ''의 값을 꼭 사용해야 한다.

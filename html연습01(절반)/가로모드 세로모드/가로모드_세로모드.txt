@@ -1,0 +1,39 @@
+가로, 세로 반응형
+  요즘에는 반응형으로 구성된 사이트가 대부분을 이룬다.
+  그래서 추가적으로 가로/세로 의 변화에 따라서 화면의 회전이 필요해졌다.
+
+  --CSS를 이용하기--
+  1.
+    @media (orientation: portrait) {
+      /* Portrait 모드일 때 적용할 CSS */
+    }
+  2.
+    @media (orientation: landscape) {
+	    /* Landscape 모드일 때 적용할 CSS */
+    }
+
+  --javascript를 이용하기--
+  1.
+    if (window.matchMedia('(orientation: portrait)').matches) {
+      // Portrait 모드일 때 실행할 스크립트
+      // 폭과 높이가 같으면 Portrait 모드로 인식돼요
+    } else {
+      // Landscape 모드일 때 실행할 스크립트
+    }
+
+  2.
+    if (window.innerWidth <= window.innerHeight) {
+	    // Portrait 모드일 때 실행할 스크립트
+    } else {
+      // Landscape 모드일 때 실행할 스크립트
+    }
+
+  3.
+    window.addEventListener('resize', function () {
+      if (window.matchMedia('(orientation: portrait)').matches) {
+        // Portrait 모드일 때 실행할 스크립트
+        // 폭과 높이가 같으면 Portrait 모드로 인식돼요
+      } else {
+        // Landscape 모드일 때 실행할 스크립트
+      }
+    });

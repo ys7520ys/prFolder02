@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body{
+      margin: 0;
+      background-color: red;
+    }
+    .container{
+      background-color: yellowgreen;
+      /* 상하좌우 여백의 값을 넣었다. */
+      height: calc(100vh - 40px);
+      width: calc(100% - 40px);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+    }
+  </style>
+</head>
+<body>
+  <div class="container"></div>  
+</body>
+</html>

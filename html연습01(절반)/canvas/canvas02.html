@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- CSS -->
+  <style>
+    *{
+      padding: 0;
+      margin: 0;
+      text-decoration: none;
+      list-style: none;
+    }
+    .container{
+      width: 100%;
+      background-color: #fff000;
+    }
+  </style>
+</head>
+<body>
+  <!-- HTML -->
+  <canvas id="main-canvas" width="512" height="200"></canvas>
+
+  <!-- SCRIPT -->
+  <script>
+    const canvas = document.getElementById('main-canvas');
+    // canvas요소의 값을 변수에 저장함
+    const context = canvas.getContext('2d');
+      //  context 변수는 2d그래픽을 그리기 위한 메소드(drawImage, fillRect, beginPath) 사용할 수 있다. 
+    const imgElem = new Image();
+      //  context 변수는 2d그래픽을 그리기 위한 메소드(drawImage, fillRect, beginPath) 사용할 수 있다. 
+    const sunFaceArray = [];
+    // 배열을 먼저 생성하고 하단에서 랜덤으로 생성한 x,y,speed의 값을 전달하여 어떻게 동작할 것인지 설정한다.
+    // 태양 얼굴을 담는 객체배열을 생성함
+    let angle = 0;
+    // 애니메이션을 설정할 때 사용할 각도를 저장할 변수이다. 진동하도록 구성할 때 사용한다.
+
+    class SunFace { /* 태양얼굴 이미지를 나타낸다 */
+      constructor(x, y, speed) { /* 좌표(x,y), speed()를 가진다. */
+        this.x = x; /* 태양얼굴의 x의 값을 지정한다 */
+        this.y = y; /* 태양얼굴의 y의 값을 지정한다 */
+        this.speed = speed; /* 태양얼굴의 speed의 값을 지정한다 */
+        this.draw(); /* 태양얼굴을 그리는 함수를 호출한 것이다. 바로 canvas에 그리진 않았다. */
+        // L> 해당 태양얼굴의 값을 그리되 하단의 조건을 충족하면서 캔버스에 그린다.
+      }
+      
+      draw() { /* draw메소든는 이미즐 캔버스에 그린다 */
+        if (this.x < -100) this.x = 512;
+        // 만약 현재 해당 이미지으 ㅣ값이 이동하면서 좌측으로 사라지면 다시 X의 값을 우측으로 이동해서 이미지의 값이 우측에서 좌측으로 무한으로 순환하도록 구성한다.
+        // 직접 imgElem을 그린다
+        context.drawImage(imgElem, this.x, this.y);
+        // 조건문을 포함하면서 동작을 진행한다.
+      }
+    }
+
+    // render()함수의 값은 반복적인 애니메이션의 동작을 처리한다.
+    function render() {
+      // context.clearRect를 사용해서 이전에 사용한 canvas의 값을 지운다.
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      
+      let sunFace; // 상단에서 선언한 sunface의 값을 재설정한다.
+      // 태양얼굴 배열에 저장된 개수만큼 반복문을 동작한다.
+      for (let i = 0; i < sunFaceArray.length; i++) {
+        sunFace = sunFaceArray[i]; // 순차적으로 해당 배열에 저장된 태양얼굴의 값을 sunFace에 저정함
+        sunFace.x -= sunFace.speed; // x좌표의 값을 태양얼굴의 speed의 값만큼 뺀다.
+        sunFace.y += Math.sin(angle++ * Math.PI/180) * sunFace.speed; // 위아래로 진동의 효과를 준다.
+        sunFace.draw(); // 태양얼굴 객체에 draw메소드를 사용해서 화면에 그린다.
+      }
+      
+      requestAnimationFrame(render);
+      // 다음 프레임이 준비되었을 때 render함수를 호출한다.
+      // L> 이러한 구성으로 좀더 부드러운 동작을 할 수 있다.
+    }
+
+    imgElem.src = 'https://studiomeal.com/wp-content/themes/studiomeal/images/dot/sunface.png';
+    // 이미지를 url을 통해서 불러온다.
+    // 이미지의 로딩이 완료되면 해당 함수를 동작시킨다.
+    imgElem.addEventListener('load', () => {
+      let x, y, speed;
+      for (let i = 0; i < 10; i++) {
+        x = Math.floor(Math.random() * canvas.width) * 0.8;
+        // 랜덤으로 x위치의 값을 설정한다.
+        y = Math.floor(Math.random() * canvas.height) * 0.7;
+        // 랜덤으로 y위치의 값을 설정한다.
+        speed = Math.floor(Math.random() * 4) + 1;
+        // 랜덤으로 해당 태양얼굴의 속도를 설정한다.
+        sunFaceArray.push(new SunFace(x, y, speed));
+        // 배열로 생성한 태양얼굴 배열에 x,y,speed의 값을 push한다 (넣는다)
+      }
+      render();
+      // 마지막으로 render를 호출하여 애니메이션을 동작한다.
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fixed Position Cursor</title>
+  <!-- 스크롤이 진행되도 화면에서 밀리지 않고 해당 영역의 값을 위치할 수 있도록 설정함 -->
+  <style>
+    html, body {
+      margin: 0;
+      height: 400vh; /* 페이지 길이 증가 */
+      cursor: none;
+    }
+
+    .cursor {
+      width: 20px;
+      height: 20px;
+      background-color: rgba(0, 0, 0, 0.8);
+      border-radius: 50%;
+      position: fixed; /* 뷰포트에 고정 */
+      /* position의 값을 고정하여 화면의 위치를 고정하였다. */
+      pointer-events: none;
+      /* 클릭, 드래그 등의 마우스 이벤트의 값을 무시한다. */
+        /* 만약 none으로 설정하지 않으면 커서가 다른 요소 위에 있을 때 해당 요소를 클릭하거나, 호버 스타일이 적용되는 것을 방해할 수 있다 다시 말해서 pointer-events를 none으로 설정한 값은 시각적인 효과만으로 동작하기 위해서다.*/
+      transform: translate(-50%, -50%);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cursor" id="cursor"></div>
+
+  <script>
+    const cursor = document.getElementById("cursor");
+    let mouseX = 0, mouseY = 0;
+    let cursorX = 0, cursorY = 0;
+    const speed = 0.1; // 따라오는 속도 조절
+
+    // 마우스가 움직일 때 위치 갱신
+    document.addEventListener("mousemove", (e) => {
+      mouseX = e.clientX; // 뷰포트 내 위치를 사용
+      mouseY = e.clientY;
+    });
+
+    function animate() {
+      // 커서 위치를 점진적으로 마우스 위치에 맞춰 변경
+      cursorX += (mouseX - cursorX) * speed;
+      cursorY += (mouseY - cursorY) * speed;
+      cursor.style.left = `${cursorX}px`;
+      cursor.style.top = `${cursorY}px`;
+
+      requestAnimationFrame(animate);
+    }
+
+    animate(); // 애니메이션 시작
+    
+  </script>
+
+</body>
+</html>

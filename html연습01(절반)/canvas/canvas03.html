@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    *{
+      padding: 0;
+      margin: 0;
+      text-decoration: none;
+      list-style: none;
+    }
+    body{
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="main-canvas" width="512" height="512"></canvas>
+  <!-- canvas를 생성하고 크기를 width, height를 통해서 설정함-->
+
+  <script>
+    const canvas = document.getElementById('main-canvas');
+    // 변수에 상단에서 생성한 canvas 요소의 값을 저장하였다.
+    const context = canvas.getContext('2d');
+    //  context 변수는 2d그래픽을 그리기 위한 메소드(drawImage, fillRect, beginPath) 사용할 수 있다. 
+    const imgElem = new Image();
+      // 새로운 이미지 객체를 생성하였고 이렇게 생성한 객체를 가지고 이미지를 불러오고 사용할 수 있다
+    const sunFaceArray = [];
+    // 하단에서 생성한 태양얼굴을 저장할 배열을 생성함
+    let angle = 0;
+    // 초기의 angle을 설정했다.
+    let moveLeft = false;
+    // 기본값을 false로 설정하고 true로 변경되었을 때 동작하도록 설정
+    let moveRight = false;
+    let moveUp = false;
+    let moveDown = false;
+
+    // 태양얼굴의 이미지를 나타낸다
+    class SunFace {
+      constructor(x, y, speed) {
+      // constructor메소드는 초기값을 설정할 때 사용된다. 
+      //  그러므로 해당 그림의 초기 위치와 속도를 설정하는 것이다
+        this.x = x;
+        this.y = y;
+        this.speed = speed;
+        this.jump = 300;
+        this.draw();
+        // this를 통해서 새로 생성되는 객체 자체를 참조한다.
+      }
+      
+      draw() { // 상단에서 생성된 이미지를 canvas에 그린다.
+        context.drawImage(imgElem, this.x, this.y);
+      }
+      
+
+      updatePosition() {
+        // 만약 true의 값을 가진다면 현재 이미지의 speed의 값을 추가하거나 뺀다
+        if (moveLeft) this.x -= this.speed;
+        if (moveRight) this.x += this.speed;
+        if (moveUp) this.y -= this.speed;
+        if (moveDown) this.y += this.speed;
+        // if (moveJump) this.y += this.jump;
+      }
+    }
+
+    function render() {
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      
+      for (let i = 0; i < sunFaceArray.length; i++) {
+        let sunFace = sunFaceArray[i];
+        sunFace.updatePosition(); // 방향키에 따라 위치 업데이트
+        sunFace.draw();
+      }
+      // 이전에 그린 canvas의 값을 지운다.
+      requestAnimationFrame(render);
+      //requestAnimationFrame()는 ()안에 들어간 함수의 값을 무한으로 동작시킨다.
+    }
+
+    // 방향키 눌렀을 때의 이벤트 리스너
+    // keydown이벤트는 키보드의 키를 눌렀을 때 동작한다.
+    //    해당 이벤트리스너는 키가 눌렸을 때 동작을 정의한다.
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowLeft') moveLeft = true;
+      // event.key를 통해서 어떠한 키가 눌렸는지 확인한다.
+      //    만약 왼쪽방향키가 눌렸다면 false로 설정한 moveLeft를 true로 변경한다.
+      //      이렇게 true로 변경되면 x또는 y좌표의 값을 속도만큼 빼거나 더한다.
+      if (event.key === 'ArrowRight') moveRight = true;
+      if (event.key === 'ArrowUp') moveUp = true;
+      if (event.key === 'ArrowDown') moveDown = true;
+      if (event.key === 'Space') moveJump = true;
+    });
+
+    // 방향키 뗐을 때의 이벤트 리스너
+    document.addEventListener('keyup', (event) => {
+      // 키보드에서 손을 뗐을 때 동작하는 이벤트리스너이다.
+      //    손을 떼면 true로 변경된 값들이 false로 변경된다.
+      //      조건문을 if문을 통해서 개별적으로 설정하여 각기 개별적으로 움직임
+      if (event.key === 'ArrowLeft') moveLeft = false;
+      if (event.key === 'ArrowRight') moveRight = false;
+      if (event.key === 'ArrowUp') moveUp = false;
+      if (event.key === 'ArrowDown') moveDown = false;
+      if (event.key === 'Space') moveJump = false;
+    });
+
+    imgElem.src = 'https://studiomeal.com/wp-content/themes/studiomeal/images/dot/sunface.png';
+    // 이미지 객체에 이미지를 추가한다. src를 통해서
+
+    // 이미지 객체가 로드가 완료되면 함수가 실행된다.
+    imgElem.addEventListener('load', () => {
+      let x, y, speed;
+      // x y speed의 값을 초기화한다. 랜덤으로 다시 이미지가 생성될 것이기 때문에
+      // 반복문을 통해서 10개의 이미지의 값을 생성하면서 랜덤으로 x,y,speed의 값을 설정한다.
+      for (let i = 0; i < 10; i++) {
+        // Math.floor를 사용해서 소수점 이하의 값을 무조건 버리도록 설정함
+        // ex) console.log(Math.floor(4.8)) => 4가 출력된다.
+        // ex) console.log(Math.floor(4.1)) => 4가 출력된다.
+        // ex) console.log(Math.floor(-4.5)) => -5가 출력된다.
+        // ex) console.log(Math.floor(-4.1)) => -5가 출력된다.
+        x = Math.floor(Math.random() * canvas.width) * 0.8;
+        y = Math.floor(Math.random() * canvas.height) * 0.7;
+        speed = Math.floor(Math.random() * 4) + 1;
+        jump = canvas.height * 30;
+        sunFaceArray.push(new SunFace(x, y, speed));
+        // 이렇게 랜덤으로 정해진 x,y,speed의 값이 위에서 만든 이미지로 전달되고, 배열에 10개의 이미지 객체가 추가된다. 각기다른 속도 위치의 값을 가진 이미지 객체가 저장되는 것이다. 
+      }
+      render();
+    });
+
+  </script>
+</body>
+</html>
